@@ -617,6 +617,22 @@ let game = {
     achievements: [
         {name: 'Cookie Amateur', status: 'disabled'}
     ],
+    images: {
+        stages: [
+            {limit: 10, image:'./images/ri2.jpeg'},
+            {limit: 20, image:'./images/ri3.jpeg'},
+            {limit: 30, image:'./images/ri4.jpeg'},
+        ],
+        changeImage(limit){
+            const imageContainer = document.getElementById('left-background')
+            if(limit > 10)
+                imageContainer.src = this.stages[0].image
+            if(limit >= 10 && limit < 20)
+                imageContainer.src = this.stages[1].image
+            if(limit >= 20 && limit < 30)
+                imageContainer.src = this.stages[2].image
+            }
+    },
     logic: {
         newsLogic(){
             setInterval(() => {
@@ -658,6 +674,7 @@ let game = {
         updateText('earnedDisplay', format(stats.Earned));
         updateText('spentDisplay', format(stats.Spent));
         updateText('clickedDisplay', format(stats.Clicked));
+        this.images.changeImage(game.player.cookieStats.Earned)
         enableNews === 'enabled' && this.constructNews()
     },
     constructNews () {
@@ -709,7 +726,10 @@ let game = {
         newsButton.onclick = () => {
             const newsArr = game.news.generateNews()
             let currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] 
-            newsButton.innerHTML = currentNews
+            newsButton.innerHTML = currentNews;
+        }
+        if(game.player.cookieStats.Earned == 15){
+            console.log('it is still running.')
         }
 
         let localSave = game.saving.getSaveFromCache();
@@ -722,6 +742,7 @@ let game = {
         game.constructNews();
         game.logic.clickAndShopLogic();
         game.logic.newsLogic();
+        game.images.changeImage()
     }
 }
 
