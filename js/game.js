@@ -152,7 +152,53 @@ class Upgrade {
         }
     }
 }
+class Achievements {
+    achievements = [
+        {
+            name: 'Cookie Amateur',
+            status: 'disabled',
+            description: 'Fez 15 cookies',
+            trigger: 'limit',
+            triggerDetail: 15
+        },
+        {
+            name: 'Cookie Enjoyer',
+            status: 'disabled',
+            description: 'Fez 50 cookies',
+            trigger: 'limit',
+            triggerDetail: 50
+        },
+        {
+            name: 'Cookie Entrepreneur',
+            status: 'disabled'
+        },
+        {
+            name: 'Cookie Racist',
+            status: 'disabled'
+        }
+    ];
 
+    generateAchievementHTML(){
+        let finalHtml = ''
+        this.achievements.forEach((ac) => {
+            if(ac.status === 'enabled'){
+            finalHtml += `<h3>${ac.name}</h3><div>${ac.description}</div>`}
+        })
+        game.utilities.updateText('achievement-list',finalHtml)
+        return finalHtml;
+    }
+
+    triggerAchievement(){
+        const currentCookies = game.player.cookieStats.Earned
+        this.achievements.map((ac) => {
+            if (ac.trigger === 'limit'){
+                currentCookies >= ac.triggerDetail? (
+                    ac.status = 'enabled') : ''
+            }
+        })
+        this.generateAchievementHTML()
+    }
+}
 class Player {
     constructor() {
         this.cookies = 0;
@@ -613,10 +659,9 @@ let game = {
             }
         }
     },
+    achievement: new Achievements(),
     player: new Player(),
-    achievements: [
-        {name: 'Cookie Amateur', status: 'disabled'}
-    ],
+
     images: {
         stages: [
             {limit: 10, image:'./images/ri2.jpeg'},
@@ -637,6 +682,7 @@ let game = {
         newsLogic(){
             setInterval(() => {
             game.updateDisplays('enabled')
+            game.achievement.triggerAchievement()
         }, 3000);},
         clickAndShopLogic(){
             game.updateDisplays();
@@ -681,7 +727,7 @@ let game = {
         const newsArr = game.news.generateNews()
         let currentNews = [];
         newsArr.length > 0 ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] : ''
-        newsArr.length > 0 && game.utilities.updateText('newsContainer', currentNews)
+        newsArr.length > 0 && game.utilities.updateText('newsContainer', currentNews[0])
     },
     constructShop () {
         let buildings = game.buildings;
@@ -723,7 +769,7 @@ let game = {
             game.player.clickCookie() 
         };
         const newsButton = document.getElementsByClassName('newsContainer')[0]
-        newsButton.onclick = () => {
+        newsButton.onclick = () => { // Achar o lugar disso
             const newsArr = game.news.generateNews()
             let currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] 
             newsButton.innerHTML = currentNews;
@@ -738,6 +784,7 @@ let game = {
         } else {
             console.log('No cache save found');
         }
+
         game.constructShop();
         game.constructNews();
         game.logic.clickAndShopLogic();
