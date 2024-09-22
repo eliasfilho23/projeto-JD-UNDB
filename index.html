@@ -1,54 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css"/>
-    <title>Cookie Clicker | 0</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<title>Cookie Clicker | 0</title>
 </head>
+
 <body>
-	<div class="saving">
+	<!-- <div class="saving">
 		<button class="import" onclick="game.saving.openBox('import')">Import</button>
-		<button class="export" onclick="game.saving.openBox('export')">Export</button>
-	  <button class="export wipe" onclick="game.saving.wipeSave()">Wipe Save</button>
-	</div>
+		<button class="export" onclick="game.saving.openBox('export')">Export</button> -->
+	<button class="export wipe" onclick="game.saving.wipeSave()">Wipe Save</button>
+	<!-- </div>
 	<div class="importExportBox">
 		<div>
 			<textarea id="saveBox" maxlength="5000"></textarea>
 			<button onclick="game.saving.closeBox()">Close</button>
 		</div>
-	</div>
-	<img id='left-background' src="./images/ri1.jpeg" alt="'left-background'"/>
-	<div class="cookieContainer">
-		<b class="cookieDisplay">0</b></br>
-		cps : <b class="cpsDisplay">0</b> | cpc : <b class="cpcDisplay">0</b>
-		<button class="cookieButton"><img src="images/cookie.png"/></button>
-	</div>
-	<div class="shopContainer">
-		<div class="shopList"></div>
-		<div class="shop"></div>
-	</div>
-	<div">
-		<button class="newsContainer"></button>
-	</div>
-	<div style="position: absolute">
-		<dialog id="achievement1" style="margin-top: 200px; margin-left: 38vw; position: relative;">
-			<form method="dialog" style="display: grid; grid-template-rows: 1fr 1fr">
-				<h2>Conquista Desbloqueada!</h2>
-				<p style="grid-row: 2;">Fez 15 cookies!</p>
-				<button style="grid-column: 2; grid-row: 1; width: 30px; height: 20px;">X</button>
-			</form>
-		</dialog>
+	</div> -->
+
+	<div style="display: grid; grid-template-columns: repeat(3, 1fr);">
+		<img id="left-background" style="height: 300px; width: 100%; height: 700px;" src="./images/ri1.jpeg"
+			alt="left-background" />
+		<div class="cookieContainer">
+			<b class="cookieDisplay">0</b><br>
+			cps : <b class="cpsDisplay">0</b> | cpc : <b class="cpcDisplay">0</b>
+			<button class="cookieButton"><img src="images/cookie.png" /></button>
+		</div>
+		<div style="display: flex; grid-column: 3;" class="shopContainer">
+			<div class="shopList"></div>
+			<div class="shop"></div>
+		</div>
 	</div>
 
-	
-	<!-- <li>Cookies : <b class="cookieDisplay">0</b></li>
+	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+		<div style="grid-column: 2; display: flex; justify-content: center;">
+			<button style="height: 200px; font-size: x-large; border: none; background-color: violet;" class="newsContainer">
+				<h1 id="newsButtonText">Save the fuckin little ribeiro</h1>
+			</button>
+		</div>
+		<div style="position: absolute;">
+			<dialog id="achievement1" style="margin-top: 200px; margin-left: 38vw; position: relative;">
+				<form method="dialog" style="display: grid; grid-template-rows: 1fr 1fr;">
+					<h2>Conquista Desbloqueada!</h2>
+					<p style="grid-row: 2;">Fez 15 cookies!</p>
+					<button style="grid-column: 2; grid-row: 1; width: 30px; height: 20px;">X</button>
+				</form>
+			</dialog>
+		</div>
+	</div>
+
+	<!-- 
+	<li>Cookies : <b class="cookieDisplay">0</b></li>
 	<li>Cookies per click : <b class="cpcDisplay">0</b></li>
 	<li>Cookies per sec : <b class="cpsDisplay">0</b></li>
 	<li>Earned : <b class="earnedDisplay">0</b></li>
 	<li>Spent : <b class="spentDisplay">0</b></li>
-	<li>Clicked : <b class="clickedDisplay">0</b></li> -->
+	<li>Clicked : <b class="clickedDisplay">0</b></li>
+	-->
+
 	<script src="js/base64.js"></script>
 	<script src="js/game.js"></script>
 </body>
+
 </html>

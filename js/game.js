@@ -629,7 +629,7 @@ let game = {
                 imageContainer.src = this.stages[0].image
             if(limit >= 10 && limit < 20)
                 imageContainer.src = this.stages[1].image
-            if(limit >= 20 && limit < 30)
+            if(limit > 20 && limit <= 30)
                 imageContainer.src = this.stages[2].image
             }
     },
