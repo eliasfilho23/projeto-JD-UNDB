@@ -190,6 +190,32 @@ let game = {
         recalculateCPS: true,
         key: 'cookieclicker'
     },
+    news: {
+        newsArray: [
+            { "news": "lorem ipsum 1", "limit": 10 },
+            { "news": "lorem ipsum 2", "limit": 20 },
+            { "news": "dolor sit amet 3", "limit": 40 },
+            { "news": "consectetur adipiscing 4", "limit": 70 },
+            { "news": "elit sed do 5", "limit": 110 },
+            { "news": "eiusmod tempor 6", "limit": 160 },
+            { "news": "incididunt ut 7", "limit": 220 },
+            { "news": "labore et dolore 8", "limit": 290 },
+            { "news": "magna aliqua 9", "limit": 370 },
+            { "news": "ut enim ad 10", "limit": 460 },
+            { "news": "minim veniam 11", "limit": 560 }
+        ]
+        ,
+        generateNews() {
+            const totalCookies = game.player.cookieStats.Earned
+            const enabledNews = []
+            this.newsArray.forEach((el) => {
+                if(el.limit <= totalCookies){
+                    enabledNews.push(el)
+                }
+            })
+            return enabledNews;
+        },
+    },
     buildings: [
         // Generate all buildings here
         new Building('Cursor', 15, 0.1, [
@@ -588,29 +614,38 @@ let game = {
         }
     },
     player: new Player(),
-    logic () {
-        game.updateDisplays();
-        // Only recalculate it when needed, saves on some processing power because this can turn out to be quite a lot of maths.
-        if (game.settings.recalculateCPS == true) {
-            let CPS = 0;
-            game.buildings.forEach(building => {
-                CPS += building.getCPS();
-            });
-            game.settings.recalculateCPS = false;
-            game.player.aMPF = CPS / game.settings.frameRate;
-            game.updateShop(game.currentShop);
-        }
-        if (document.hasFocus()) {
-            game.player.earnCookie(game.player.aMPF);
-            game.saving.export();
-            setTimeout(game.logic, 1000 / game.settings.frameRate);
-        } else {
-            game.player.earnCookie(game.player.aMPF * game.settings.frameRate);
-            game.saving.export();
-            setTimeout(game.logic, 1000);
+    achievements: [
+        {name: 'Cookie Amateur', status: 'disabled'}
+    ],
+    logic: {
+        newsLogic(){
+            setInterval(() => {
+            game.updateDisplays('enabled')
+        }, 3000);},
+        clickAndShopLogic(){
+            game.updateDisplays();
+            // Only recalculate it when needed, saves on some processing power because this can turn out to be quite a lot of maths.
+            if (game.settings.recalculateCPS == true) {
+                let CPS = 0;
+                game.buildings.forEach(building => {
+                    CPS += building.getCPS();
+                });
+                game.settings.recalculateCPS = false;
+                game.player.aMPF = CPS / game.settings.frameRate;
+                game.updateShop(game.currentShop);
+            }
+            if (document.hasFocus()) {
+                game.player.earnCookie(game.player.aMPF);
+                game.saving.export();
+                setTimeout(game.logic.clickAndShopLogic, 1000 / game.settings.frameRate);
+            } else {
+                game.player.earnCookie(game.player.aMPF * game.settings.frameRate);
+                game.saving.export();
+                setTimeout(game.logic.clickAndShopLogic, 1000);
+            }
         }
     },
-    updateDisplays () {
+    updateDisplays (enableNews) {
         // Create temporary shorthand aliases for ease of use.
         let updateText = game.utilities.updateText;
         let format = game.utilities.formatNumber;
@@ -623,6 +658,13 @@ let game = {
         updateText('earnedDisplay', format(stats.Earned));
         updateText('spentDisplay', format(stats.Spent));
         updateText('clickedDisplay', format(stats.Clicked));
+        enableNews === 'enabled' && this.constructNews()
+    },
+    constructNews () {
+        const newsArr = game.news.generateNews()
+        let currentNews = [];
+        newsArr.length > 0 ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] : ''
+        newsArr.length > 0 && game.utilities.updateText('newsContainer', currentNews)
     },
     constructShop () {
         let buildings = game.buildings;
@@ -658,11 +700,17 @@ let game = {
                 return false;
             }
         });
-
+        
         // This enables the cookie clicking process.
         document.getElementsByClassName('cookieButton')[0].onclick = () => {
             game.player.clickCookie() 
         };
+        const newsButton = document.getElementsByClassName('newsContainer')[0]
+        newsButton.onclick = () => {
+            const newsArr = game.news.generateNews()
+            let currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] 
+            newsButton.innerHTML = currentNews
+        }
 
         let localSave = game.saving.getSaveFromCache();
         if (localSave) {
@@ -670,9 +718,10 @@ let game = {
         } else {
             console.log('No cache save found');
         }
-
         game.constructShop();
-        game.logic();
+        game.constructNews();
+        game.logic.clickAndShopLogic();
+        game.logic.newsLogic();
     }
 }
 
