@@ -160,7 +160,7 @@ class UpgradeHall {
                 el? el.name === buildingName : '')
             if(currentSection){
                 let currentSectionElementToDisplayAmount;
-                currentSection.amount >= 5 ? currentSectionElementToDisplayAmount = 8 : (
+                currentSection.amount >= 8 ? currentSectionElementToDisplayAmount = 8 : (
                     currentSectionElementToDisplayAmount = currentSection.amount
                 )
                 relationIdAmount.push({
