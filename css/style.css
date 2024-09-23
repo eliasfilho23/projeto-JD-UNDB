@@ -287,6 +287,15 @@ button.upgBtn:active {
     transform: translateY(2px);
 }
 
+.upgrade-hall-container {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.upgrade-hall-child {
+    background-color: pink;
+}
+
 @media only screen and (max-width: 800px) {
     
     .shopList button:not(:last-child) {

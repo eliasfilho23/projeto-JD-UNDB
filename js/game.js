@@ -125,6 +125,15 @@ class Building {
         return html;
     }
 
+    retrieveBuildingStats() {
+        const buildingStats = game.buildings.map((el) => {
+            if(el.amount > 0) {
+                return {name: el.name, amount: el.amount}
+            }
+        })
+        return buildingStats
+    }
+
     generateShopHTML() {
         let format = game.utilities.formatNumber;
         let singleEffect = (this.baseEffect * this.multiplier)
@@ -134,6 +143,49 @@ class Building {
         let html = `<b>${this.name}</b></br>You have <b>${this.amount}</b> ${this.name.toLowerCase()}(s).</br>Each ${this.name.toLowerCase()} produces <b>${format(singleEffect)}</b> cookie(s).</br>All of your ${this.name.toLowerCase()}(s) combined produces <b>${format(this.effect)}</b> cookie(s).</br>${this.generateBuyButtons()}</br>${this.generateUpgradeButtons()}`;
         return html;
     }
+}
+const buildToActivateMethod = new Building;
+class UpgradeHall {
+    upgradeHallHTMLSections = document.getElementsByClassName('upgrade-hall-child')
+    
+    returnElAmountBySectionId(){
+        const buildingStats = buildToActivateMethod.retrieveBuildingStats()
+
+        const relationIdAmount = []
+        for(let i = 0; i < this.upgradeHallHTMLSections.length; i++){
+            if(this.upgradeHallHTMLSections[i]){
+            const currentParsedElement = this.upgradeHallHTMLSections[i]
+            const buildingName = currentParsedElement.id
+            const currentSection = buildingStats.find((el) => 
+                el? el.name === buildingName : '')
+            if(currentSection){
+                let currentSectionElementToDisplayAmount;
+                currentSection.amount >= 5 ? currentSectionElementToDisplayAmount = 8 : (
+                    currentSectionElementToDisplayAmount = currentSection.amount
+                )
+                relationIdAmount.push({
+                    sectionIdAndName: currentParsedElement.id,
+                    amount: currentSectionElementToDisplayAmount,
+                })
+            }
+        }}
+        return relationIdAmount;
+    }
+
+    generateHTML() {
+        const data = this.returnElAmountBySectionId()
+        data && data.forEach((el) => {
+            const currentSection = document.getElementById(el.sectionIdAndName)
+            for(let i = 0; i < el.amount; i++){
+                currentSection.style = 'visibility: visible'
+                currentSection.childNodes.length !== el.amount?(
+                currentSection.innerHTML += (
+                    `<img style='width: 75px' src='./images/sprite-hall-${el.sectionIdAndName}.png' alt='${el.sectionIdAndName}'/>`
+                )) : ''
+            }
+        })
+    }
+
 }
 
 class Upgrade {
@@ -262,6 +314,7 @@ let game = {
             return enabledNews;
         },
     },
+    
     buildings: [
         // Generate all buildings here
         new Building('Cursor', 15, 0.1, [
@@ -661,7 +714,7 @@ let game = {
     },
     achievement: new Achievements(),
     player: new Player(),
-
+    upgradeHall: new UpgradeHall(),
     images: {
         stages: [
             {limit: 10, image:'./images/ri2.jpeg'},
@@ -682,6 +735,7 @@ let game = {
         newsLogic(){
             setInterval(() => {
             game.updateDisplays('enabled')
+            game.upgradeHall.generateHTML()
             game.achievement.triggerAchievement()
         }, 3000);},
         clickAndShopLogic(){
@@ -747,6 +801,7 @@ let game = {
         finalHtml += building.generateShopHTML();
         game.utilities.updateText('shop', finalHtml);
     },
+    
     buyBuilding (name, amount) {
         let building = game.utilities.getBuildingByName(name);
         building.buy(amount);
@@ -785,11 +840,13 @@ let game = {
             console.log('No cache save found');
         }
 
+
         game.constructShop();
         game.constructNews();
         game.logic.clickAndShopLogic();
         game.logic.newsLogic();
         game.images.changeImage()
+
     }
 }
 
