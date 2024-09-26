@@ -216,39 +216,71 @@ class Achievements {
         {
             name: 'Cookie Enjoyer',
             status: 'disabled',
+            description: 'Fez 20 cookies',
+            trigger: 'limit',
+            triggerDetail: 20
+        },
+        {
+            name: 'Cookie Entrepreneur',
+            status: 'disabled',
             description: 'Fez 50 cookies',
             trigger: 'limit',
             triggerDetail: 50
         },
         {
-            name: 'Cookie Entrepreneur',
-            status: 'disabled'
-        },
-        {
             name: 'Cookie Racist',
-            status: 'disabled'
+            status: 'disabled',
+            description: 'Fez 10000 cookies',
+            trigger: 'limit',
+            triggerDetail: 10000
         }
     ];
 
-    generateAchievementHTML(){
+    relateAchievementsStatus(){
+        let relation = ''
+        this.achievements.map((ac) => {
+            ac.status === 'disabled'? relation += '0' : relation += '1'
+        })
+        return relation;
+    }
+
+    updateAchievementHTML(){
         let finalHtml = ''
         this.achievements.forEach((ac) => {
             if(ac.status === 'enabled'){
-            finalHtml += `<h3>${ac.name}</h3><div>${ac.description}</div>`}
+            finalHtml += (
+                `<div class='achievement-list-child'>
+                    <h3>${ac.name}</h3>
+                    <div>${ac.description}</div>
+                </div>`
+            )}
         })
         game.utilities.updateText('achievement-list',finalHtml)
-        return finalHtml;
+        this.relateAchievementsStatus()
     }
 
-    triggerAchievement(){
+    achievementTriggerListener(){
         const currentCookies = game.player.cookieStats.Earned
-        this.achievements.map((ac) => {
-            if (ac.trigger === 'limit'){
+        this.achievements.forEach((ac) => {
+            if (ac.trigger === 'limit' && ac.status === 'disabled'){
+                currentCookies >= ac.triggerDetail? (
+                    ac.status = 'enabled', alert((`Conquista desbloqueada:
+                         ${ac.name}: ${ac.description}`))) : ''
+            }
+        })
+        this.updateAchievementHTML()
+    }
+
+    constructAchievements(){
+        const currentCookies = game.player.cookieStats.Earned
+        this.achievements.forEach((ac) => {
+            if (ac.trigger === 'limit' && ac.status === 'disabled'){
                 currentCookies >= ac.triggerDetail? (
                     ac.status = 'enabled') : ''
             }
         })
-        this.generateAchievementHTML()
+        this.updateAchievementHTML()
+        
     }
 }
 class Player {
@@ -661,6 +693,7 @@ let game = {
                 }
             } catch { console.log('Something went wrong whilst loading building data, likely from an older version and not to worry.') }
         },
+        // loadAchievements 
         wipeSave() {
             if (confirm('Are you sure you want to wipe your save? This cannot be reversed!')) {
                 game.player.cookies = 0;
@@ -736,8 +769,13 @@ let game = {
             setInterval(() => {
             game.updateDisplays('enabled')
             game.upgradeHall.generateHTML()
-            game.achievement.triggerAchievement()
         }, 3000);},
+
+        updateLogic(){
+            setInterval(() => {
+            game.achievement.achievementTriggerListener()
+        }, 1000);},
+
         clickAndShopLogic(){
             game.updateDisplays();
             // Only recalculate it when needed, saves on some processing power because this can turn out to be quite a lot of maths.
@@ -843,10 +881,11 @@ let game = {
 
         game.constructShop();
         game.constructNews();
+        game.achievement.constructAchievements()
         game.logic.clickAndShopLogic();
         game.logic.newsLogic();
+        game.logic.updateLogic();
         game.images.changeImage()
-
     }
 }
 
