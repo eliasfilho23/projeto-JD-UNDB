@@ -214,12 +214,12 @@ class Challenges {
         }
     }
 
-    handleChallengeAwnser(challengeHTML){
+    handleChallengeAnwser(challengeHTML){
         challengeDiv.innerHTML = (`
             ${challengeHTML}
-            <button class='challenge-awnser-close-btn'>Fechar</button>`)
-        const awnserCloseBtn = document.getElementsByClassName('challenge-awnser-close-btn')[0]
-        awnserCloseBtn.addEventListener('click', () => {
+            <button class='challenge-anwser-close-btn'>Fechar</button>`)
+        const anwserCloseBtn = document.getElementsByClassName('challenge-anwser-close-btn')[0]
+        anwserCloseBtn.addEventListener('click', () => {
             challengeDiv.style = 'display: none'
             challengeDiv.innerHTML = ''
 
@@ -235,8 +235,8 @@ class Challenges {
                     challenge1Btns[i].addEventListener('click', () => {
                         i === 1 ? (
                             game.player.earnCookie(79),
-                            this.handleChallengeAwnser(anwserRelationHTML[0].true)) : 
-                            this.handleChallengeAwnser(anwserRelationHTML[0].false
+                            this.handleChallengeAnwser(anwserRelationHTML[0].true)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[0].false
                         )
                     })        
                 }
@@ -248,8 +248,8 @@ class Challenges {
                     challenge2Btns[i].addEventListener('click', () => {
                         i === 1 ? (
                             game.player.earnCookie(79), 
-                            this.handleChallengeAwnser(anwserRelationHTML[1].true)) : 
-                            this.handleChallengeAwnser(anwserRelationHTML[1].false)
+                            this.handleChallengeAnwser(anwserRelationHTML[1].true)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[1].false)
                     })
                 }
                 break;
