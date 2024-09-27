@@ -153,6 +153,109 @@ class Upgrade {
     }
 }
 
+const challengeDiv = document.getElementById('challenge-div')
+const anwserRelationHTML = [
+    {
+        limit: 10,
+        true: 'resposta correta!',
+        false: 'resposta falsa!',
+        alreadyPopped: false
+    },
+    {
+        limit: 120,
+        true: 'resposta correta!',
+        false: 'resposta falsa!',
+        alreadyPopped: false
+    }
+]
+class Challenges {
+
+    initChallengeRelation() {
+        anwserRelationHTML.forEach((entry) => {
+            if(game.player.cookieStats.Earned > entry.limit){
+                entry.alreadyPopped = true
+            }
+        })
+    }
+
+    handleChallengePopUpTrigger(){
+        if(game.player.cookieStats.Earned > anwserRelationHTML[0].limit && anwserRelationHTML[0].alreadyPopped === false){
+            this.handleChallengeDisplay(1)
+            anwserRelationHTML[0].alreadyPopped = true
+        }
+        if(game.player.cookieStats.Earned > anwserRelationHTML[1].limit && anwserRelationHTML[1].alreadyPopped === false){
+            this.handleChallengeDisplay(2)
+            anwserRelationHTML[1].alreadyPopped = true
+        }
+    }
+
+    generateChallengeHTML(challenge){
+        challengeDiv.style = 'display: block';
+        switch (challenge){
+        case 1:
+            challengeDiv.innerHTML = (
+             `<div>
+                 Pergunta numero 1
+                  <button class='challenge1Btns'>Sim</button>
+                 <button class='challenge1Btns'>Não</button>
+            </div>`)
+            break;
+        case 2:
+            console.log(challengeDiv)
+            challengeDiv.innerHTML = (
+            `<div>
+                Pergunta numero 2
+               <button class='challenge2Btns'>Opcao 1</button>
+               <button class='challenge2Btns'>Opcao 2</button>
+               <button class='challenge2Btns'>Opcao 3</button>
+               <button class='challenge2Btns'>Opcao 4</button>
+            </div>`)
+            break;
+        }
+    }
+
+    handleChallengeAwnser(challengeHTML){
+        challengeDiv.innerHTML = (`
+            ${challengeHTML}
+            <button class='challenge-awnser-close-btn'>Fechar</button>`)
+        const awnserCloseBtn = document.getElementsByClassName('challenge-awnser-close-btn')[0]
+        awnserCloseBtn.addEventListener('click', () => {
+            challengeDiv.style = 'display: none'
+            challengeDiv.innerHTML = ''
+
+        })
+    }
+
+    handleChallengeDisplay(n){
+        switch (n) {
+            case 1:
+                this.generateChallengeHTML(1)
+                const challenge1Btns = document.getElementsByClassName('challenge1Btns')
+                for(let i = 0; i < challenge1Btns.length; i++){
+                    challenge1Btns[i].addEventListener('click', () => {
+                        i === 1 ? (
+                            game.player.earnCookie(79),
+                            this.handleChallengeAwnser(anwserRelationHTML[0].true)) : 
+                            this.handleChallengeAwnser(anwserRelationHTML[0].false
+                        )
+                    })        
+                }
+                break;
+            case 2:
+                this.generateChallengeHTML(2)
+                const challenge2Btns = document.getElementsByClassName('challenge2Btns')
+                for(let i = 0; i < challenge2Btns.length; i++){
+                    challenge2Btns[i].addEventListener('click', () => {
+                        i === 1 ? (
+                            game.player.earnCookie(79), 
+                            this.handleChallengeAwnser(anwserRelationHTML[1].true)) : 
+                            this.handleChallengeAwnser(anwserRelationHTML[1].false)
+                    })
+                }
+                break;
+        }
+    }
+}
 class Player {
     constructor() {
         this.cookies = 0;
@@ -190,6 +293,7 @@ let game = {
         recalculateCPS: true,
         key: 'cookieclicker'
     },
+    challengeActions: new Challenges(),
     news: {
         newsArray: [
             { "news": "lorem ipsum 1", "limit": 10 },
@@ -621,6 +725,8 @@ let game = {
         newsLogic(){
             setInterval(() => {
             game.updateDisplays('enabled')
+            game.challengeActions.handleChallengePopUpTrigger()
+
         }, 3000);},
         clickAndShopLogic(){
             game.updateDisplays();
@@ -718,6 +824,9 @@ let game = {
         } else {
             console.log('No cache save found');
         }
+
+        game.challengeActions.initChallengeRelation()
+        game.challengeActions.handleChallengeDisplay()
         game.constructShop();
         game.constructNews();
         game.logic.clickAndShopLogic();
