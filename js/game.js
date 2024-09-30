@@ -171,53 +171,94 @@ const anwserRelationHTML = [
 class Challenges {
 
     initChallengeRelation() {
-        anwserRelationHTML.forEach((entry) => {
-            if(game.player.cookieStats.Earned > entry.limit){
-                entry.alreadyPopped = true
-            }
-        })
+        // anwserRelationHTML.forEach((entry) => {
+        //     if(game.player.cookieStats.Earned > entry.limit){
+        //         entry.alreadyPopped = true
+        //     }
+        // })
     }
 
     handleChallengePopUpTrigger(){
-        if(game.player.cookieStats.Earned > anwserRelationHTML[0].limit && anwserRelationHTML[0].alreadyPopped === false){
+        if(game.player.cookieStats.Earned > anwserRelationHTML[0].limit
+             && anwserRelationHTML[0].alreadyPopped === false){
             this.handleChallengeDisplay(1)
             anwserRelationHTML[0].alreadyPopped = true
         }
-        if(game.player.cookieStats.Earned > anwserRelationHTML[1].limit && anwserRelationHTML[1].alreadyPopped === false){
+        if(game.player.cookieStats.Earned > anwserRelationHTML[1].limit &&
+             anwserRelationHTML[1].alreadyPopped === false){
             this.handleChallengeDisplay(2)
             anwserRelationHTML[1].alreadyPopped = true
         }
     }
 
     generateChallengeHTML(challenge){
-        challengeDiv.style = 'display: block';
+        challengeDiv.className= 'challengeDiv'
+        challengeDiv.style = ''
         switch (challenge){
         case 1:
             challengeDiv.innerHTML = (
-             `<div>
-                 Pergunta numero 1
-                  <button class='challenge1Btns'>Sim</button>
+             `<div class='challengeDivTitle'>Pergunta numero 1</div>
+             <div class='challengeDivContent'>
+                <img class='challengeDivImg' src='images/cookie.png'/>
+                <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+                </div>
+            </div>
+             <div class='challengeDivButtons'> 
+                 <button class='challenge1Btns'>Sim</button>
                  <button class='challenge1Btns'>Não</button>
-            </div>`)
+            </div>
+                 `)
             break;
         case 2:
-            console.log(challengeDiv)
             challengeDiv.innerHTML = (
-            `<div>
-                Pergunta numero 2
+            `<div class='challengeDivTitle'>Pergunta numero 2</div>
+                <div class='challengeDivContent'>
+                <img class='challengeDivImg' src='images/cookie.png'/>
+                <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+                </div>
+            </div>
+            <div class='challengeDivButtons'>
                <button class='challenge2Btns'>Opcao 1</button>
                <button class='challenge2Btns'>Opcao 2</button>
                <button class='challenge2Btns'>Opcao 3</button>
                <button class='challenge2Btns'>Opcao 4</button>
-            </div>`)
+            </div>
+            `)
             break;
         }
     }
 
-    handleChallengeAnwser(challengeHTML){
+    handleChallengeAnwser(challengeHTML, won, amount){
         challengeDiv.innerHTML = (`
+            <div class='challengeDivTitle'>
             ${challengeHTML}
-            <button class='challenge-anwser-close-btn'>Fechar</button>`)
+            </div>
+            <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+            </div>
+            ${won === true? `
+                <div style='font-size: xx-large; text-align:center'>Ganhou ${amount} pontos!</div>`: ''}
+            <div class='challengeDivButtons'>
+                <button class='challenge-anwser-close-btn challenge1Btns'>Fechar</button>
+            </div>
+            `)
         const anwserCloseBtn = document.getElementsByClassName('challenge-anwser-close-btn')[0]
         anwserCloseBtn.addEventListener('click', () => {
             challengeDiv.style = 'display: none'
@@ -235,7 +276,7 @@ class Challenges {
                     challenge1Btns[i].addEventListener('click', () => {
                         i === 1 ? (
                             game.player.earnCookie(79),
-                            this.handleChallengeAnwser(anwserRelationHTML[0].true)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[0].true, true, 79)) : 
                             this.handleChallengeAnwser(anwserRelationHTML[0].false
                         )
                     })        
@@ -248,7 +289,7 @@ class Challenges {
                     challenge2Btns[i].addEventListener('click', () => {
                         i === 1 ? (
                             game.player.earnCookie(79), 
-                            this.handleChallengeAnwser(anwserRelationHTML[1].true)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[1].true, true, 79)) : 
                             this.handleChallengeAnwser(anwserRelationHTML[1].false)
                     })
                 }
