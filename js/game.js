@@ -171,11 +171,11 @@ const anwserRelationHTML = [
 class Challenges {
 
     initChallengeRelation() {
-        // anwserRelationHTML.forEach((entry) => {
-        //     if(game.player.cookieStats.Earned > entry.limit){
-        //         entry.alreadyPopped = true
-        //     }
-        // })
+        anwserRelationHTML.forEach((entry) => {
+            if(game.player.cookieStats.Earned > entry.limit){
+                entry.alreadyPopped = true
+            }
+        })
     }
 
     handleChallengePopUpTrigger(){
