@@ -7,6 +7,110 @@ h1 {
     margin-bottom:0px;
 }
 
+.challengeDiv {
+    background-color: pink;
+    position: absolute;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    width: 1000px;
+    height: 645px;
+    margin:-12% 24% ;
+}
+
+.challengeDivTitle {
+    text-align: center;
+    padding: 20px;
+}
+
+.challengeDivContent {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 2fr 0.5fr;
+}
+
+.challengeDivText{
+    font-size: larger;
+    align-self: center;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.challengeDivImg{
+    justify-self: center;
+    max-width:80%;
+    grid-column: 2;
+    grid-row:2;
+    background-color:lightcoral;
+}
+
+.challengeDivButtons{
+    grid-row: 3;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.challenge1Btns, .challenge2Btns {
+    font-size: large;
+    height: 50px;
+    width: 100px;
+    padding: 10px;
+}
+/* .innerChallengeQuestion {
+    background-color: purple;
+    color: white;
+    width: 40%;
+    height: 80%;
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+} */
+
+/* .innerChallengeDivBtnBox-truefalse{
+    grid-row: 3;
+    grid-column: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.innerChallengeDivBtnBox-multiple{
+    grid-row: 3;
+    grid-column: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.innerChallengeDivImg {
+    background-color: lightcoral;
+    margin: px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    grid-column: span 2;
+    grid-row: 2;
+    height: 400px;
+}
+.innerChallengeDivTextContent {
+    grid-column: 3;
+}
+
+.challenge1Btns {
+    height: 50px;
+    width: 100px;
+    padding: 10px;
+}
+.challenge2Btns {
+    height: 50px;
+    width: 100px;
+    padding: 10px;
+} */
+
 .stats {
     width:250px;
     height:250px;

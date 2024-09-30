@@ -204,6 +204,151 @@ class Upgrade {
         }
     }
 }
+
+const challengeDiv = document.getElementById('challenge-div')
+const anwserRelationHTML = [
+    {
+        limit: 10,
+        true: 'resposta correta!',
+        false: 'resposta falsa!',
+        alreadyPopped: false
+    },
+    {
+        limit: 120,
+        true: 'resposta correta!',
+        false: 'resposta falsa!',
+        alreadyPopped: false
+    }
+]
+class Challenges {
+
+    initChallengeRelation() {
+        anwserRelationHTML.forEach((entry) => {
+            if(game.player.cookieStats.Earned > entry.limit){
+                entry.alreadyPopped = true
+            }
+        })
+    }
+
+    handleChallengePopUpTrigger(){
+        if(game.player.cookieStats.Earned > anwserRelationHTML[0].limit
+             && anwserRelationHTML[0].alreadyPopped === false){
+            this.handleChallengeDisplay(1)
+            anwserRelationHTML[0].alreadyPopped = true
+        }
+        if(game.player.cookieStats.Earned > anwserRelationHTML[1].limit &&
+             anwserRelationHTML[1].alreadyPopped === false){
+            this.handleChallengeDisplay(2)
+            anwserRelationHTML[1].alreadyPopped = true
+        }
+    }
+
+    generateChallengeHTML(challenge){
+        challengeDiv.className= 'challengeDiv'
+        challengeDiv.style = ''
+        switch (challenge){
+        case 1:
+            challengeDiv.innerHTML = (
+             `<div class='challengeDivTitle'>Pergunta numero 1</div>
+             <div class='challengeDivContent'>
+                <img class='challengeDivImg' src='images/cookie.png'/>
+                <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+                </div>
+            </div>
+             <div class='challengeDivButtons'> 
+                 <button class='challenge1Btns'>Sim</button>
+                 <button class='challenge1Btns'>Não</button>
+            </div>
+                 `)
+            break;
+        case 2:
+            challengeDiv.innerHTML = (
+            `<div class='challengeDivTitle'>Pergunta numero 2</div>
+                <div class='challengeDivContent'>
+                <img class='challengeDivImg' src='images/cookie.png'/>
+                <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+                </div>
+            </div>
+            <div class='challengeDivButtons'>
+               <button class='challenge2Btns'>Opcao 1</button>
+               <button class='challenge2Btns'>Opcao 2</button>
+               <button class='challenge2Btns'>Opcao 3</button>
+               <button class='challenge2Btns'>Opcao 4</button>
+            </div>
+            `)
+            break;
+        }
+    }
+
+    handleChallengeAnwser(challengeHTML, won, amount){
+        challengeDiv.innerHTML = (`
+            <div class='challengeDivTitle'>
+            ${challengeHTML}
+            </div>
+            <div class='challengeDivText'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
+                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
+                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
+                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
+                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                condimentum mattis neque. 
+            </div>
+            ${won === true? `
+                <div style='font-size: xx-large; text-align:center'>Ganhou ${amount} pontos!</div>`: ''}
+            <div class='challengeDivButtons'>
+                <button class='challenge-anwser-close-btn challenge1Btns'>Fechar</button>
+            </div>
+            `)
+        const anwserCloseBtn = document.getElementsByClassName('challenge-anwser-close-btn')[0]
+        anwserCloseBtn.addEventListener('click', () => {
+            challengeDiv.style = 'display: none'
+            challengeDiv.innerHTML = ''
+
+        })
+    }
+
+    handleChallengeDisplay(n){
+        switch (n) {
+            case 1:
+                this.generateChallengeHTML(1)
+                const challenge1Btns = document.getElementsByClassName('challenge1Btns')
+                for(let i = 0; i < challenge1Btns.length; i++){
+                    challenge1Btns[i].addEventListener('click', () => {
+                        i === 1 ? (
+                            game.player.earnCookie(79),
+                            this.handleChallengeAnwser(anwserRelationHTML[0].true, true, 79)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[0].false
+                        )
+                    })        
+                }
+                break;
+            case 2:
+                this.generateChallengeHTML(2)
+                const challenge2Btns = document.getElementsByClassName('challenge2Btns')
+                for(let i = 0; i < challenge2Btns.length; i++){
+                    challenge2Btns[i].addEventListener('click', () => {
+                        i === 1 ? (
+                            game.player.earnCookie(79), 
+                            this.handleChallengeAnwser(anwserRelationHTML[1].true, true, 79)) : 
+                            this.handleChallengeAnwser(anwserRelationHTML[1].false)
+                    })
+                }
+                break;
+        }
+    }
+}
 class Achievements {
     achievements = [
         {
@@ -320,6 +465,7 @@ let game = {
         recalculateCPS: true,
         key: 'cookieclicker'
     },
+    challengeActions: new Challenges(),
     news: {
         newsArray: [
             { "news": "lorem ipsum 1", "limit": 10 },
@@ -768,6 +914,8 @@ let game = {
         newsLogic(){
             setInterval(() => {
             game.updateDisplays('enabled')
+            game.challengeActions.handleChallengePopUpTrigger()
+
             game.upgradeHall.generateHTML()
         }, 3000);},
 
@@ -877,6 +1025,9 @@ let game = {
         } else {
             console.log('No cache save found');
         }
+
+        game.challengeActions.initChallengeRelation()
+        game.challengeActions.handleChallengeDisplay()
 
 
         game.constructShop();
