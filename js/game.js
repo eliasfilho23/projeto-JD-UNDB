@@ -498,7 +498,7 @@ let game = {
 
     challengeActions: new Challenges(),
     news: {
-        newsArray: [
+        defaultNewsArray: [
             { "news": "lorem ipsum 1", "limit": 10 },
             { "news": "lorem ipsum 2", "limit": 20 },
             { "news": "dolor sit amet 3", "limit": 40 },
@@ -510,16 +510,37 @@ let game = {
             { "news": "magna aliqua 9", "limit": 370 },
             { "news": "ut enim ad 10", "limit": 460 },
             { "news": "minim veniam 11", "limit": 560 }
-        ]
-        ,
+        ],
+        milestoneNewsArray: [
+            { "news": "pikachu", "limit": 100 },
+            { "news": "raichu", "limit": 1000 },
+            { "news": "riolu", "limit": 5000 },
+            { "news": "lucario", "limit": 10000 },
+        ],
+
+        
         generateNews() {
             const totalCookies = game.player.cookieStats.Earned
-            const enabledNews = []
-            this.newsArray.forEach((el) => {
+            const regularNews = []
+            const milestoneNews = []
+            this.defaultNewsArray.forEach((el) => {
                 if(el.limit <= totalCookies){
-                    enabledNews.push(el)
+                    regularNews.push(el)
                 }
             })
+            this.milestoneNewsArray.forEach((el) => {
+                if(el.limit <= totalCookies){
+                    milestoneNews.push(el)
+                }
+            })
+            // 3 - 2 (being both milestone the same entry)
+            enabledNews= [ 
+                regularNews[regularNews.length-1],
+                regularNews[regularNews.length-2],
+                regularNews[regularNews.length-3],
+                milestoneNews[milestoneNews.length-1],
+                milestoneNews[milestoneNews.length-1],
+            ]
             return enabledNews;
         },
     },
