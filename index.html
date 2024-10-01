@@ -21,7 +21,7 @@
 		</div>
 	</div> -->
 
-	<div style="display: grid; grid-template-columns: repeat(3, 1fr);">
+	<div style="display: grid; grid-template-columns: repeat(3, 1fr); padding-right: 20px; padding-left: 20px;">
 		<img id="left-background" style="height: 300px; width: 100%; height: 550px;" src="./images/ri1.jpeg"
 			alt="left-background" />
 		<div class="cookieContainer">
@@ -29,8 +29,8 @@
 			cps : <b class="cpsDisplay">0</b> | cpc : <b class="cpcDisplay">0</b>
 			<button class="cookieButton"><img src="images/cookie.png" /></button>
 		</div>
-		<div style="display: flex; grid-column: 3;" class="shopContainer">
-			<div class="shopList"></div>
+		<div style="display: flex; grid-column: 3; background-color: coral;" class="shopContainer">
+			<div class="shopList" style="overflow-y: auto; height: 480px; align-self: center;"></div>
 			<div class="shop"></div>
 		</div>
 	</div>
@@ -38,15 +38,19 @@
 	<div id="challenge-div" style="display: block; position: absolute;"></div>
 	</div>
 
-	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 20px;">
+	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 20px; gap: 20px;">
 		<div class="upgrade-hall-container">
-			<div id="Cursor" class="upgrade-hall-child" style="visibility: hidden;"></div>
-			<div id="Grandma" class="upgrade-hall-child" style="visibility: hidden;"></div>
-			<div id="Farm" class="upgrade-hall-child" style="visibility: hidden;"></div>
-			<div id="Mine" class="upgrade-hall-child" style="visibility: hidden;"></div>
+			<div id="Cursor" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Grandma" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Farm" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Mine" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Factory" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Bank" class="upgrade-hall-child" style="display: none;"></div>
+			<div id="Temple" class="upgrade-hall-child" style="display: none;"></div>
 		</div>
-		<div style="grid-column: 2; display: flex; justify-content: center;">
-			<button style="height: 200px; font-size: x-large; border: none; background-color: violet;" class="newsContainer">
+		<div class="news-div" style="text-align: center;">
+			<h1 class="news-title">Notícias</h1>
+			<button class="newsContainer" style="height: 200px; font-size: x-large; border: none; background-color: aquamarine;">
 				<h1 id="newsButtonText">Save the fuckin little ribeiro</h1>
 			</button>
 		</div>

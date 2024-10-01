@@ -7,6 +7,19 @@ h1 {
     margin-bottom:0px;
 }
 
+.news-div {
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 10% 80%;
+    justify-content: center;
+    align-items: center;
+    background-color:aquamarine;
+}
+
+.newsContainer {
+    grid-row: 2;
+}
+
 .status-div {
     background-color: lightcoral;
     display: grid;
@@ -426,12 +439,22 @@ button.upgBtn:active {
 }
 
 .upgrade-hall-container {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    height: 360px;
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .upgrade-hall-child {
     background-color: pink;
+    border: 20px;
+    border-color: darkcyan;
+    border-style: dotted dotted none none;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 10px;
+    height: 100px;
+    width: 600px;
 }
 
 @media only screen and (max-width: 800px) {

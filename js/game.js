@@ -180,7 +180,7 @@ class UpgradeHall {
                 currentSection.style = 'visibility: visible'
                 currentSection.childNodes.length !== el.amount?(
                 currentSection.innerHTML += (
-                    `<img style='width: 75px' src='./images/sprite-hall-${el.sectionIdAndName}.png' alt='${el.sectionIdAndName}'/>`
+                    `<img style='width: 100px' src='./images/sprite-hall-${el.sectionIdAndName}.png' alt='${el.sectionIdAndName}'/>`
                 )) : ''
             }
         })
@@ -495,6 +495,7 @@ let game = {
         recalculateCPS: true,
         key: 'cookieclicker'
     },
+
     challengeActions: new Challenges(),
     news: {
         newsArray: [
@@ -944,6 +945,9 @@ let game = {
     achievement: new Achievements(),
     player: new Player(),
     upgradeHall: new UpgradeHall(),
+    giveCookies(num){
+        this.player.earnCookie(num)
+    },
     images: {
         stages: [
             {limit: 10, image:'./images/ri2.jpeg'},
