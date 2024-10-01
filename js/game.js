@@ -552,7 +552,6 @@ let game = {
             currentListItem.id === currentListElement.id ? (
                 currentListItem.style = 'visibility: visible'
             ) : currentListItem.style = 'visibility: hidden'
-            console.log(currentListItem)
         }},
 
     handleMenuChange() {
@@ -1041,7 +1040,7 @@ let game = {
     constructNews () {
         const newsArr = game.news.generateNews()
         let currentNews = [];
-        newsArr.length > 0 ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)].news] : ''
+        newsArr.length > 0 ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)]] : ''
         newsArr.length > 0 && game.utilities.updateText('newsContainer', currentNews[0])
     },
     constructShop () {

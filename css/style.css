@@ -105,6 +105,12 @@ h1 {
     width: 100px;
     padding: 10px;
 }
+
+#Cursor {
+    background-image: url('../images/cursor-bg.png');
+    background-size: contain;
+}
+
 /* .innerChallengeQuestion {
     background-color: purple;
     color: white;
@@ -440,15 +446,13 @@ button.upgBtn:active {
 
 .upgrade-hall-container {
     height: 360px;
+    width:max-content;
     overflow-y: auto;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 .upgrade-hall-child {
-    background-color: pink;
-    border: 20px;
-    border-color: darkcyan;
-    border-style: dotted dotted none none;
+    background-color: #facab5    ;
     display: flex;
     justify-content: space-around;
     gap: 20px;
