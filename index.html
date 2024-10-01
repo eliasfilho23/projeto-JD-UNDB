@@ -22,7 +22,7 @@
 	</div> -->
 
 	<div style="display: grid; grid-template-columns: repeat(3, 1fr);">
-		<img id="left-background" style="height: 300px; width: 100%; height: 600px;" src="./images/ri1.jpeg"
+		<img id="left-background" style="height: 300px; width: 100%; height: 550px;" src="./images/ri1.jpeg"
 			alt="left-background" />
 		<div class="cookieContainer">
 			<b class="cookieDisplay">0</b><br>
@@ -38,7 +38,7 @@
 	<div id="challenge-div" style="display: block; position: absolute;"></div>
 	</div>
 
-	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 20px;">
 		<div class="upgrade-hall-container">
 			<div id="Cursor" class="upgrade-hall-child" style="visibility: hidden;"></div>
 			<div id="Grandma" class="upgrade-hall-child" style="visibility: hidden;"></div>
@@ -50,11 +50,16 @@
 				<h1 id="newsButtonText">Save the fuckin little ribeiro</h1>
 			</button>
 		</div>
-		<div style="position: absolute;">
-			<div class="achievement-list" style="margin-top: 200px; margin-left: 38vw; position: relative;">
-					<h2>Conquista Desbloqueada!</h2>
-					<p style="grid-row: 2;">Fez 15 cookies!</p>
-				</form>
+		<div class="status-div">
+			<div class="status-menu">
+				<div class="status-label status">Status</div>
+				<div class="status-label achievements">Conquistas</div>
+				<div class="status-label misc">Misc.</div>
+			</div>
+			<div class="status-content">
+				<div id="status-list" style="visibility: hidden;"></div>
+				<div id="achievements-list" class="achievements-list" style="visibility: hidden;"></div>
+				<div id="misc-list" style="visibility: hidden;"></div>
 			</div>
 		</div>
 	</div>

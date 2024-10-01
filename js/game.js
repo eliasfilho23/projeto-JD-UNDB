@@ -375,10 +375,38 @@ class Achievements {
         {
             name: 'Cookie Racist',
             status: 'disabled',
-            description: 'Fez 10000 cookies',
+            description: 'Fez 100 cookies',
             trigger: 'limit',
-            triggerDetail: 10000
-        }
+            triggerDetail: 100
+        },
+        {
+            name: 'Cookie Jeffrey Epstein',
+            status: 'disabled',
+            description: 'Fez 150 cookies',
+            trigger: 'limit',
+            triggerDetail: 150
+        },
+        {
+            name: 'Cookie Drake Bell',
+            status: 'disabled',
+            description: 'Fez 200 cookies',
+            trigger: 'limit',
+            triggerDetail: 200
+        },
+        {
+            name: 'Cookie Drake',
+            status: 'disabled',
+            description: 'Fez 500 cookies',
+            trigger: 'limit',
+            triggerDetail: 500
+        },
+        {
+            name: 'Cookie P Diddy',
+            status: 'disabled',
+            description: 'Fez 1000 cookies',
+            trigger: 'limit',
+            triggerDetail: 1000
+        },
     ];
 
     relateAchievementsStatus(){
@@ -391,6 +419,8 @@ class Achievements {
 
     updateAchievementHTML(){
         let finalHtml = ''
+        // const currentStatusTitle = document.getElementsByClassName('current-status-label')[0]
+        // currentStatusTitle.innerHTML = 'Conquistas'
         this.achievements.forEach((ac) => {
             if(ac.status === 'enabled'){
             finalHtml += (
@@ -400,7 +430,7 @@ class Achievements {
                 </div>`
             )}
         })
-        game.utilities.updateText('achievement-list',finalHtml)
+        game.utilities.updateText('achievements-list',finalHtml)
         this.relateAchievementsStatus()
     }
 
@@ -491,6 +521,26 @@ let game = {
             })
             return enabledNews;
         },
+    },
+
+    handleStatsToggle(currentListElement){
+        listElements = document.getElementsByClassName('status-label')
+        for(let i = 0; i < listElements.length; i++){
+            const currentListItem = document.getElementById(`${listElements[i].className.split(' ')[1]}-list`)
+            currentListItem.id === currentListElement.id ? (
+                currentListItem.style = 'visibility: visible'
+            ) : currentListItem.style = 'visibility: hidden'
+            console.log(currentListItem)
+        }},
+
+    handleMenuChange() {
+        const elements = document.getElementsByClassName('status-label')
+        for(let i = 0; i < elements.length; i++){
+            elements[i].addEventListener('click', () => {
+                const currentListElement = document.getElementById(`${elements[i].className.split(' ')[1]}-list`)
+                this.handleStatsToggle(currentListElement)
+            })
+        }
     },
     
     buildings: [
@@ -1028,6 +1078,7 @@ let game = {
 
         game.challengeActions.initChallengeRelation()
         game.challengeActions.handleChallengeDisplay()
+        game.handleMenuChange()
 
 
         game.constructShop();
