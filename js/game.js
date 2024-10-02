@@ -180,7 +180,7 @@ class UpgradeHall {
                 currentSection.style = 'visibility: visible'
                 currentSection.childNodes.length !== el.amount?(
                 currentSection.innerHTML += (
-                    `<img style='width: 100px' src='./images/sprite-hall-${el.sectionIdAndName}.png' alt='${el.sectionIdAndName}'/>`
+                    `<img style='width: 100px' src='./images/upgrade-hall-jpeg/sprite-${el.sectionIdAndName}.jpeg' alt='${el.sectionIdAndName}'/>`
                 )) : ''
             }
         })
