@@ -54,19 +54,19 @@ class Building {
         let multiplier = 1;
         let buildingCount = game.utilities.getBuildingCount();
         this.specialCPS = 0;
-        if (this.name == 'Cursor') { game.player.aMPC = 1; }
+        if (this.name == 'Voluntário') { game.player.aMPC = 1; }
         this.upgrades.forEach(upgrade => {
             if (upgrade.owned == true) {
                 if (upgrade.special == false) {
                     multiplier *= 2;
-                    if (this.name == 'Cursor') {
+                    if (this.name == 'Voluntário') {
                         player.aMPC *= 2;
                     }
                 } else {
                     // Special casing for all special types of upgrades
                     // There may at some point be more than just cursors here, as theres special stuff for grandmas as well.
                     switch (this.name) {
-                        case 'Cursor':
+                        case 'Voluntário':
                             let nonCursorBuildingCount = buildingCount - this.amount;
                             this.specialCPS += (upgrade.special * nonCursorBuildingCount) * this.amount;
                             player.aMPC += (upgrade.special * nonCursorBuildingCount);
@@ -147,10 +147,14 @@ class Building {
 const buildToActivateMethod = new Building;
 class UpgradeHall {
     upgradeHallHTMLSections = document.getElementsByClassName('upgrade-hall-child')
-    
     returnElAmountBySectionId(){
         const buildingStats = buildToActivateMethod.retrieveBuildingStats()
-
+        buildingStats.forEach((el) => {
+            if(el){
+                el.name = el.name.toLowerCase().split(" ").join("")
+            }
+        })
+        console.log(buildingStats)
         const relationIdAmount = []
         for(let i = 0; i < this.upgradeHallHTMLSections.length; i++){
             if(this.upgradeHallHTMLSections[i]){
@@ -176,11 +180,20 @@ class UpgradeHall {
         const data = this.returnElAmountBySectionId()
         data && data.forEach((el) => {
             const currentSection = document.getElementById(el.sectionIdAndName)
+            const relation = {
+                voluntário : 'worker',
+                miniusinahidrelétrica: 'hydroeletric-plant',
+                fossasépticabiodigestora: 'biodigester',
+                centrodecompostagem: 'composting-center',
+                satélite: 'satellite',
+                painelsolar: 'solar-panel',
+                sistemaagroflorestal: 'agroforestry-system'
+            }
             for(let i = 0; i < el.amount; i++){
                 currentSection.style = 'visibility: visible'
                 currentSection.childNodes.length !== el.amount?(
                 currentSection.innerHTML += (
-                    `<img style='width: 100px' src='./images/upgrade-hall-jpeg/sprite-${el.sectionIdAndName}.jpeg' alt='${el.sectionIdAndName}'/>`
+                    `<img style=' margin-right: 10px; margin-top:75px' src='./images/upgrade-hall-sprites/${relation[(el.sectionIdAndName).toLowerCase().split(" ").join("")]}-sprite.png' alt='${el.sectionIdAndName}'/>`
                 )) : ''
             }
         })
@@ -566,111 +579,85 @@ let game = {
     
     buildings: [
         // Generate all buildings here
-        new Building('Cursor', 15, 0.1, [
-            new Upgrade('Reinforced Index Finger', 100, 'Cursors and clicking are twice as efficient', 1),
-            new Upgrade('Carpal tunnel prevention cream', 500, 'Cursors and clicking are twice as efficient', 1),
-            new Upgrade('Ambidextrous', 10000, 'Cursors and clicking are twice as efficient', 10),
-            new Upgrade('Thousand Fingers', 100000, 'Mouse and cursors gain +0.1 cookies for every non-cursor building owned', 25, 0.1),
-            new Upgrade('Million Fingers', 10000000, 'Mouse and cursors gain +0.5 cookies for every non-cursor building owned', 50, 0.5),
-            new Upgrade('Billion Fingers', 100000000, 'Mouse and cursors gain +5 cookies for every non-cursor building owned', 100, 5),
-            new Upgrade('Trillion Fingers', 1000000000, 'Mouse and cursors gain +50 for every non-cursor building owned', 150, 50),
-            new Upgrade('Quadrillion Fingers', 10000000000, 'Mouse and cursors gain +500 cookies for each non-cursor building owned', 200, 500),
-            new Upgrade('Quintillion Fingers', 10000000000000, 'Mouse and cursors gain +5.000K for every non-cursor building owned', 250, 5000),
-            new Upgrade('Sextillion Fingers', 10000000000000000, ' Mouse and cursors gain +50.000K for every non-cursor building owned', 300, 50000),
-            new Upgrade('Septillion Fingers', 10000000000000000000, 'Mouse and cursors gain +500.000K for every non-cursor building owned', 350, 500000),
-            new Upgrade('Octillion Fingers', 10000000000000000000000, 'Mouse and cursors gain +5.000M for each non-cursor building owned', 400, 5000000)
+        new Building('Voluntário', 15, 0.1, [
+            new Upgrade('Luvas reforçadas', 100, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 1),
+            new Upgrade('Carrinho de mão robusto', 500, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 1),
+            new Upgrade('Rede de coleta comunitária', 10000, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 10),
+            new Upgrade('Veículo de coleta', 100000, 'Voluntários ganham +0.1 pontos de notoriedade por cada building não voluntário', 25, 0.1),
+            new Upgrade('Parceria com ONGs', 10000000, 'Voluntários ganham +0.5 pontos de notoriedade por cada building não voluntário', 50, 0.5),
+            new Upgrade('Caminhão de coleta automatizado', 100000000, 'Voluntários ganham +5 pontos de notoriedade por cada building não voluntário', 100, 5),
+            new Upgrade('Programa de reciclagem', 1000000000, 'Voluntários ganham +50 pontos de notoriedade por cada building não voluntário', 150, 50),
+            new Upgrade('Educação ambiental nas escolas', 10000000000, 'Voluntários ganham +500 pontos de notoriedade por cada building não voluntário', 200, 500)
         ], false),
-        new Building('Grandma', 100, 1, [
-            new Upgrade('Forwards from grandma', 1000, 'Grandmas are twice as efficient', 1),
-            new Upgrade('Steel-plated rolling pins', 5000, 'Grandmas are twice as efficient', 5),
-            new Upgrade('Lubricated dentures', 50000, 'Grandmas are twice as efficient', 25),
-            new Upgrade('Prune juice', 5000000, 'Grandmas are twice as efficient', 50),
-            new Upgrade('Double-thick glasses', 500000000, 'Grandmas are twice as efficient', 100),
-            new Upgrade('Aging agents', 50000000000, 'Grandmas are twice as efficient', 150),
-            new Upgrade('Xtreme walkers', 50000000000000, 'Grandmas are twice as efficient', 200),
-            new Upgrade('The Unbridling', 50000000000000000, 'Grandmas are twice as efficient', 250),
-            new Upgrade('Reverse dementia', 50000000000000000000, 'Grandmas are twice as efficient', 300),
-            new Upgrade('Timeproof hair dyes', 50000000000000000000000, 'Grandmas are twice as efficient', 350),
-            new Upgrade('Good manners', 500000000000000000000000000, 'Grandmas are twice as efficient', 400),
+        
+        new Building('Mini usina hidrelétrica', 100, 1, [
+            new Upgrade('Turbinas eficientes', 1000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 1),
+            new Upgrade('Geradores reforçados', 5000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 5),
+            new Upgrade('Sistema de controle automático', 50000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 25),
+            new Upgrade('Captação de água de chuva', 5000000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 50),
+            new Upgrade('Filtro de sedimentos avançado', 500000000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 100),
+            new Upgrade('Desvio para peixes migratórios', 50000000000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 150),
+            new Upgrade('Armazenamento de energia renovável', 50000000000000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 200),
+            new Upgrade('Monitoramento remoto', 50000000000000000, 'Mini usinas hidrelétricas são duas vezes mais eficientes', 250)
         ]),
-        new Building('Farm', 1100, 8, [
-            new Upgrade('Cheap hoes', 11000, 'Farms are twice as efficient', 1),
-            new Upgrade('Fertilizer', 55000, 'Farms are twice as efficient', 5),
-            new Upgrade('Biscuit Trees', 550000, 'Farms are twice as efficient', 25),
-            new Upgrade('Genetically-modified Biscuits', 55000000, 'Farms are twice as efficient', 50),
-            new Upgrade('Gingerbread scarecrows', 5500000000, 'Farms are twice as efficient', 100),
-            new Upgrade('Pulsar sprinklers', 550000000000, 'Farms are twice as efficient', 150),
-            new Upgrade('Fudge fungus', 550000000000000, 'Farms are twice as efficient', 200),
-            new Upgrade('Wheat triffids', 550000000000000000, 'Farms are twice as efficient', 250),
-            new Upgrade('Humane pesticides', 550000000000000000000, 'Farms are twice as efficient', 300),
-            new Upgrade('Barnstars', 550000000000000000000000, 'Ah, yes. These help quite a bit. Somehow.', 350),
-            new Upgrade('Lindworms', 5500000000000000000000000000, 'You have to import these from far up north, but they really help areate the soil', 400)
+        
+        new Building('Fossa séptica biodigestora', 1100, 8, [
+            new Upgrade('Filtro de efluentes', 11000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 1),
+            new Upgrade('Sistema de ventilação aprimorado', 55000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 5),
+            new Upgrade('Câmaras de biogás', 550000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 25),
+            new Upgrade('Tratamento de resíduos avançado', 55000000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 50),
+            new Upgrade('Barreira contra poluentes', 5500000000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 100),
+            new Upgrade('Alerta automático de manutenção', 550000000000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 150),
+            new Upgrade('Redução de odores', 550000000000000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 200),
+            new Upgrade('Reaproveitamento de biogás', 550000000000000000, 'Fossas sépticas biodigestoras são duas vezes mais eficientes', 250)
         ]),
-        new Building('Mine', 12000, 47, [
-            new Upgrade('Sugar gas', 120000, 'Mines are twice as efficient', 1),
-            new Upgrade('Megadrill', 600000, 'Mines are twice as efficient', 5),
-            new Upgrade('Ultradrill', 6000000, 'Mines are twice as efficient', 25),
-            new Upgrade('Ultimadrill', 600000000, 'Mines are twice as efficient', 50),
-            new Upgrade('H-bomb Mining', 60000000000, 'Mines are twice as efficient', 100),
-            new Upgrade('Coreforge', 6000000000000, 'Mines are twice as efficient', 150),
-            new Upgrade('Planetsplitters', 6000000000000000, 'Mines are twice as efficient', 200),
-            new Upgrade('Canola oil wells', 6000000000000000000, 'Mines are twice as efficient', 250),
-            new Upgrade('Mole People', 6000000000000000000000, 'Mines are twice as efficient', 300),
-            new Upgrade('Mine canaries', 6000000000000000000000000, 'Mines are twice as efficient', 350),
-            new Upgrade('Bore again', 60000000000000000000000000000, 'Mines are twice as efficient', 400)
+        
+        new Building('Centro de compostagem', 12000, 47, [
+            new Upgrade('Triturador de resíduos orgânicos', 120000, 'Centros de compostagem são duas vezes mais eficientes', 1),
+            new Upgrade('Vermicompostagem', 600000, 'Centros de compostagem são duas vezes mais eficientes', 5),
+            new Upgrade('Estufas de compostagem', 6000000, 'Centros de compostagem são duas vezes mais eficientes', 25),
+            new Upgrade('Sistema de irrigação automático', 600000000, 'Centros de compostagem são duas vezes mais eficientes', 50),
+            new Upgrade('Termômetros de compostagem', 60000000000, 'Centros de compostagem são duas vezes mais eficientes', 100),
+            new Upgrade('Rede de coleta de orgânicos', 6000000000000, 'Centros de compostagem são duas vezes mais eficientes', 150),
+            new Upgrade('Composteiras comunitárias', 6000000000000000, 'Centros de compostagem são duas vezes mais eficientes', 200),
+            new Upgrade('Parcerias com hortas comunitárias', 6000000000000000000, 'Centros de compostagem são duas vezes mais eficientes', 250)
         ]),
-        new Building('Factory', 130000, 260, [
-            new Upgrade('Sturdier conveyor belts', 1300000, 'Factories are twice as efficient', 1),
-            new Upgrade('Child labor', 6500000, 'Factories are twice as efficient', 5),
-            new Upgrade('Sweatshop', 65000000, 'Factories are twice as efficient', 25),
-            new Upgrade('Radium reactors', 6500000000, 'Factories are twice as efficient', 50),
-            new Upgrade('Recombobulators', 650000000000, 'Factories are twice as efficient', 100),
-            new Upgrade('Deep-bake process', 65000000000000, 'Factories are twice as efficient', 150),
-            new Upgrade('Cyborg workforce', 65000000000000000, 'Factories are twice as efficient', 200),
-            new Upgrade('78-hour days', 65000000000000000000, 'Factories are twice as efficient', 250),
-            new Upgrade('Machine learning', 65000000000000000000000, 'Factories are twice as efficient', 300),
-            new Upgrade('Brownie point system', 65000000000000000000000000, 'Factories are twice as efficient', 350),
-            new Upgrade('"Volunteer" interns', 650000000000000000000000000000, 'Factories are twice as efficient', 400)
+        
+        new Building('Satélite', 130000, 260, [
+            new Upgrade('Sensores de desmatamento', 1300000, 'Satélites são duas vezes mais eficientes', 1),
+            new Upgrade('Monitoramento de fauna e flora', 6500000, 'Satélites são duas vezes mais eficientes', 5),
+            new Upgrade('Mapeamento de qualidade da água', 65000000, 'Satélites são duas vezes mais eficientes', 25),
+            new Upgrade('Previsão de desastres naturais', 6500000000, 'Satélites são duas vezes mais eficientes', 50),
+            new Upgrade('Aprimoramento de imagens satelitais', 650000000000, 'Satélites são duas vezes mais eficientes', 100),
+            new Upgrade('Energia solar para satélites', 65000000000000, 'Satélites são duas vezes mais eficientes', 150),
+            new Upgrade('Comunicação com comunidades isoladas', 65000000000000000, 'Satélites são duas vezes mais eficientes', 200),
+            new Upgrade('Rede de sensoriamento remoto', 65000000000000000000, 'Satélites são duas vezes mais eficientes', 250)
         ]),
-        new Building('Bank', 1400000, 1400, [
-            new Upgrade('Taller Tellers', 14000000, 'Banks are twice as efficient', 1),
-            new Upgrade('Scissor-resistant Credit Cards', 70000000, 'Banks are twice as efficient', 5),
-            new Upgrade('Acid-proof vaults', 700000000, 'Banks are twice as efficient', 25),
-            new Upgrade('Chocolate coins', 70000000000, 'Banks are twice as efficient', 50),
-            new Upgrade('Exponential interest rates', 7000000000000, 'Banks are twice as efficient', 100),
-            new Upgrade('Financial zen', 700000000000000, 'Banks are twice as efficient', 150),
-            new Upgrade('Way of the wallet', 700000000000000000, 'Banks are twice as efficient', 200),
-            new Upgrade('The stuff rationale', 700000000000000000000, 'Banks are twice as efficient', 250),
-            new Upgrade('Edible money', 700000000000000000000, 'Banks are twice as efficient', 300),
-            new Upgrade('Grand supercycle', 700000000000000000000000, 'Banks are twice as efficient', 350),
-            new Upgrade('Rules of acquisition', 7000000000000000000000000000, 'Banks are twice as efficient', 400)
+        
+        new Building('Painel solar', 1400000, 1400, [
+            new Upgrade('Painéis solares de alta eficiência', 14000000, 'Painéis solares são duas vezes mais eficientes', 1),
+            new Upgrade('Baterias de longa duração', 70000000, 'Painéis solares são duas vezes mais eficientes', 5),
+            new Upgrade('Inversores de energia avançados', 700000000, 'Painéis solares são duas vezes mais eficientes', 25),
+            new Upgrade('Seguidores solares', 70000000000, 'Painéis solares são duas vezes mais eficientes', 50),
+            new Upgrade('Revestimento antirreflexo', 7000000000000, 'Painéis solares são duas vezes mais eficientes', 100),
+            new Upgrade('Manutenção automatizada', 700000000000000, 'Painéis solares são duas vezes mais eficientes', 150),
+            new Upgrade('Materiais reciclados', 700000000000000000, 'Painéis solares são duas vezes mais eficientes', 200),
+            new Upgrade('Expansão para escolas comunitárias', 700000000000000000000, 'Painéis solares são duas vezes mais eficientes', 250)
         ]),
-        new Building('Temple', 20000000, 7800, [
-            new Upgrade('Golden idols', 200000000, 'Temples are twice as efficient', 1),
-            new Upgrade('Sacrifices', 1000000000, 'Temples are twice as efficient', 5),
-            new Upgrade('Delicious blessing', 10000000000, 'Temples are twice as efficient', 25),
-            new Upgrade('Sun festival', 1000000000000, 'Temples are twice as efficient', 50),
-            new Upgrade('Enlarged pantheon', 100000000000000, 'Temples are twice as efficient', 100),
-            new Upgrade('Great Baker in the sky', 10000000000000000, 'Temples are twice as efficient', 150),
-            new Upgrade('Creation myth', 10000000000000000000, 'Temples are twice as efficient', 200),
-            new Upgrade('Theocracy', 10000000000000000000000, 'Temples are twice as efficient', 250),
-            new Upgrade('Sick rap prayers', 10000000000000000000000000, 'Temples are twice as efficient', 300),
-            new Upgrade('Psalm-reading', 10000000000000000000000000000, 'Temples are twice as efficient', 350),
-            new Upgrade('War of the gods', 100000000000000000000000000000000, 'Temples are twice as efficient', 400)
+        new Building('Sistema Agroflorestal', 330000000, 44000, [
+            new Upgrade('Sombreamento ideal', 3300000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 1),
+            new Upgrade('Consórcio produtivo', 16500000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 5),
+            new Upgrade('Solo saudável', 165000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 25),
+            new Upgrade('Tecnologia sustentável', 16500000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 50),
+            new Upgrade('Planejamento agroecológico', 1650000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 100),
+            new Upgrade('Biodiversidade', 165000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 150),
+            new Upgrade('Sequestro de carbono', 165000000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 200),
+            new Upgrade('Manejo integrado', 165000000000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 250),
+            new Upgrade('Inovações verdes', 165000000000000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 300),
+            new Upgrade('Diversificação de culturas', 165000000000000000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 350),
+            new Upgrade('Soluções climáticas', 1650000000000000000000000000000000, 'Sistemas agroflorestais são duas vezes mais eficientes', 400)
         ]),
-        new Building('Wizard Tower', 330000000, 44000, [
-            new Upgrade('Pointier hats', 3300000000, 'Wizard towers are twice as efficient', 1),
-            new Upgrade('Beardlier beards', 16500000000, 'Wizard towers are twice as efficient', 5),
-            new Upgrade('Ancient grimoires', 165000000000, 'Wizard towers are twice as efficient', 25),
-            new Upgrade('Kitchen curses', 16500000000000, 'Wizard towers are twice as efficient', 50),
-            new Upgrade('School of sorcery', 1650000000000000, 'Wizard towers are twice as efficient', 100),
-            new Upgrade('Dark formulas', 165000000000000000, 'Wizard towers are twice as efficient', 150),
-            new Upgrade('Cookiemancy', 165000000000000000000, 'Wizard towers are twice as efficient', 200),
-            new Upgrade('Rabbit trick', 165000000000000000000000, 'Wizard towers are twice as efficient', 250),
-            new Upgrade('Deluxe tailored wands', 165000000000000000000000000, 'Wizard towers are twice as efficient', 300),
-            new Upgrade('Immobile spellcasting', 165000000000000000000000000000, 'Wizard towers are twice as efficient', 350),
-            new Upgrade('Electricity', 1650000000000000000000000000000000, 'Wizard towers are twices as efficient', 400)
-        ]),
+    
         new Building('Shipment', 5100000000, 260000, [
             new Upgrade('Vanilla nebulae', 51000000000, 'Shipments are twice as efficient', 1),
             new Upgrade('Wormholes', 255000000000, 'Shipments are twice as efficient', 5),
@@ -918,7 +905,7 @@ let game = {
                 game.player.cookieStats.Spent = 0;
                 game.player.cookieStats.Clicked = 0;
                 game.buildings.forEach(building => {
-                    if (building.name != 'Cursor') {
+                    if (building.name != 'Voluntário') {
                         building.locked = true;
                     }
                     building.amount = 0;
@@ -930,7 +917,7 @@ let game = {
                     }
                 });
                 game.constructShop();
-                game.updateShop('Cursor');
+                game.updateShop('Voluntário');
                 game.settings.recalculateCPS = true;
             }
         },
@@ -1053,7 +1040,7 @@ let game = {
         });
         game.utilities.updateText('shopList', finalHtml);
     },
-    currentShop: 'Cursor',
+    currentShop: 'Voluntário',
     updateShop (name) {
         game.currentShop = name;
         let finalHtml = '';

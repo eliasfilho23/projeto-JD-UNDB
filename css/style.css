@@ -1,5 +1,5 @@
 body {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Lato',Arial, Helvetica, sans-serif;
     margin:0;
 }
 
@@ -14,6 +14,13 @@ h1 {
     justify-content: center;
     align-items: center;
     background-color:aquamarine;
+    border-width: 32px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 150 fill;
+}
+
+.news-title{
+    text-shadow: white;
 }
 
 .newsContainer {
@@ -25,8 +32,11 @@ h1 {
     display: grid;
     grid-template-rows: 20% 75%;
     margin: auto;
-    width: 100%;
-    height: 350px;
+    width: 90%;
+    height: 320px;
+    border-width: 30px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 150 fill;
 }
 
 .status-menu {
@@ -106,8 +116,38 @@ h1 {
     padding: 10px;
 }
 
-#Cursor {
-    background-image: url('../images/cursor-bg.png');
+#left-background {
+    border-width: 20px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 100 fill;
+}
+
+#voluntário {
+    background-image: url('../images/upgrade-hall-bg/worker-bg.jpeg');
+    background-size: contain;
+}
+#miniusinahidrelétrica {
+    background-image: url('../images/upgrade-hall-bg/hydroeletric-plant-bg-2.jpg');
+    background-size: contain;
+}
+#fossasépticabiodigestora {
+    background-image: url('../images/upgrade-hall-bg/biodigester-bg-1.png');
+    background-size: contain;
+}
+#centrodecompostagem {
+    background-image: url('../images/upgrade-hall-bg/composting-center-bg-1.png');
+    background-size: contain;
+}
+#satélite {
+    background-image: url('../images/upgrade-hall-bg/satellite-bg.jpg');
+    background-size: contain;
+}
+#painelsolar {
+    background-image: url('../images/upgrade-hall-bg/solar-panel-2-bg.jpeg');
+    background-size: contain;
+}
+#sistemaagroflorestal {
+    background-image: url('../images/upgrade-hall-bg/agroforestry-system-bg-2.jpg');
     background-size: contain;
 }
 
@@ -284,6 +324,9 @@ h1 {
 
 .shopContainer {
     margin-top:30px;
+    border-width: 32px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 150 fill;
 }
 
 button.upgBtn{
@@ -445,10 +488,14 @@ button.upgBtn:active {
 }
 
 .upgrade-hall-container {
-    height: 360px;
+    height: 480px;
+    background-color: rgb(115, 66, 17);
     width:max-content;
     overflow-y: auto;
     overflow-x: hidden;
+    border-width: 28px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 120 fill;
 }
 
 .upgrade-hall-child {
@@ -456,9 +503,9 @@ button.upgBtn:active {
     display: flex;
     justify-content: space-around;
     gap: 20px;
-    padding: 10px;
-    height: 100px;
-    width: 600px;
+    padding: 20px;
+    height: 175px;
+    width: 800px;
 }
 
 @media only screen and (max-width: 800px) {
