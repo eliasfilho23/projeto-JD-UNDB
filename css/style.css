@@ -11,6 +11,16 @@ h1 {
     margin-bottom:0px;
 }
 
+#status-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    color: white;
+    font-size: 25px;
+    text-align: start;
+    padding-top: 8px;
+}
+
 .news-div {
     color: white;
     letter-spacing: 2px;

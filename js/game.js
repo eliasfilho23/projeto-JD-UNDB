@@ -199,7 +199,9 @@ class UpgradeHall {
                 currentSection.style = 'visibility: visible'
                 currentSection.childNodes.length !== el.amount?(
                 currentSection.innerHTML += (
-                    `<img style=' margin-right: 10px; margin-top:75px' src='./images/upgrade-hall-sprites/${relation[(el.sectionIdAndName).toLowerCase().split(" ").join("")]}-sprite.png' alt='${el.sectionIdAndName}'/>`
+                    `<img style=' margin-right: 10px; margin-top:75px'
+                     src='./images/upgrade-hall-sprites/${relation[(el.sectionIdAndName).toLowerCase().split(" ").join("")]}-sprite.png'
+                      alt='${el.sectionIdAndName}'/>`
                 )) : ''
             }
         })
@@ -569,8 +571,8 @@ let game = {
         for(let i = 0; i < listElements.length; i++){
             const currentListItem = document.getElementById(`${listElements[i].className.split(' ')[1]}-list`)
             currentListItem.id === currentListElement.id ? (
-                currentListItem.style = 'visibility: visible'
-            ) : currentListItem.style = 'visibility: hidden'
+                (currentListItem.id === 'status-list' ? currentListItem.style = 'display: flex' : currentListItem.style = 'display : block')
+            ) : currentListItem.style = 'display: none'
         }},
 
     handleMenuChange() {
