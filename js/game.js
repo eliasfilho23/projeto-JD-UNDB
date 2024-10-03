@@ -140,7 +140,13 @@ class Building {
         if (this.specialCPS > 0) {
             singleEffect += (this.specialCPS / this.amount);
         }
-        let html = `<b>${this.name}</b></br>You have <b>${this.amount}</b> ${this.name.toLowerCase()}(s).</br>Each ${this.name.toLowerCase()} produces <b>${format(singleEffect)}</b> cookie(s).</br>All of your ${this.name.toLowerCase()}(s) combined produces <b>${format(this.effect)}</b> cookie(s).</br>${this.generateBuyButtons()}</br>${this.generateUpgradeButtons()}`;
+        let html = (`<div class='shopHTMLText' style='font-size: 20px'><b style='font-size: 40px; letter-spacing: 1px'>
+            ${this.name}</b></br>Você possui <b style='font-size: 26px'>${this.amount}</b>
+             ${this.name.toLowerCase()}(s).</br>Cada ${this.name.toLowerCase()}
+              produz <b style='font-size: 26px'>${format(singleEffect)}</b> ponto(s) de notoriedade.</br>
+              Todos os ${this.name.toLowerCase()}(s) juntos produzem um total de 
+              <b style='font-size: 26px'>${format(this.effect)}</b> ponto(s).</br>${this.generateBuyButtons()}</br>
+              ${this.generateUpgradeButtons()}</div>`);
         return html;
     }
 }
@@ -437,7 +443,7 @@ class Achievements {
         this.achievements.forEach((ac) => {
             if(ac.status === 'enabled'){
             finalHtml += (
-                `<div class='achievement-list-child'>
+                `<div style='color: white; text-shadow: 3px 3px 10px black;' class='achievement-list-child'>
                     <h3>${ac.name}</h3>
                     <div>${ac.description}</div>
                 </div>`
