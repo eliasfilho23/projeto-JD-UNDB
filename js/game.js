@@ -183,7 +183,6 @@ class UpgradeHall {
         el.name = el.name.toLowerCase().split(" ").join("");
       }
     });
-    console.log(buildingStats);
     const relationIdAmount = [];
     for (let i = 0; i < this.upgradeHallHTMLSections.length; i++) {
       if (this.upgradeHallHTMLSections[i]) {

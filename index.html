@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Cookie Clicker | 0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/style.css" />
-	<title>Cookie Clicker | 0</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
-</head>
-
-<body>
-	<!-- <div class="saving">
+  <body>
+    <!-- <div class="saving">
 		<button class="import" onclick="game.saving.openBox('import')">Import</button>
 		<button class="export" onclick="game.saving.openBox('export')">Export</button> -->
-	<button class="export wipe" onclick="game.saving.wipeSave()">Wipe Save</button>
-	<!-- </div>
+    <button class="export wipe" onclick="game.saving.wipeSave()">
+      Wipe Save
+    </button>
+    <!-- </div>
 	<div class="importExportBox">
 		<div>
 			<textarea id="saveBox" maxlength="5000"></textarea>
@@ -25,63 +32,126 @@
 		</div>
 	</div> -->
 
-	<div style="display: grid; grid-template-columns: repeat(3, 1fr); padding-right: 20px; padding-left: 20px;">
-		<img id="left-background" style="height: 300px; width: 100%; height: 550px;" src="./images/ri1.jpeg"
-			alt="left-background" />
-		<div class="cookieContainer">
-			<b class="cookieDisplay">0</b><br>
-			cps : <b class="cpsDisplay">0</b> | cpc : <b class="cpcDisplay">0</b>
-			<button class="cookieButton"><img src="images/cookie.png" /></button>
-		</div>
-		<div style="display: flex; grid-column: 3; background-color: coral;" class="shopContainer">
-			<div class="shopList" style="overflow-y: auto; height: 480px; align-self: center;"></div>
-			<div class="shop"></div>
-		</div>
-	</div>
-	<div style="position: relative">
-	<div id="challenge-div" style="display: block; position: absolute;"></div>
-	</div>
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding-right: 20px;
+        padding-left: 20px;
+      "
+    >
+      <img
+        id="left-background"
+        style="height: 300px; width: 100%; height: 550px"
+        src="./images/ri1.jpeg"
+        alt="left-background"
+      />
+      <div class="cookieContainer">
+        <b class="cookieDisplay">0</b><br />
+        cps : <b class="cpsDisplay">0</b> | cpc : <b class="cpcDisplay">0</b>
+        <button class="cookieButton">Click me</button>
+      </div>
+      <div
+        style="display: flex; grid-column: 3; background-color: coral"
+        class="shopContainer"
+      >
+        <div
+          class="shopList"
+          style="overflow-y: auto; height: 480px; align-self: center"
+        ></div>
+        <div class="shop"></div>
+      </div>
+    </div>
+    <div style="position: relative">
+      <div id="challenge-div" style="display: block; position: absolute"></div>
+    </div>
 
-	<div id="bottom-content" style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 20px; gap: 20px;">
-		<div class="upgrade-hall-container">
-			<div id="voluntário" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="miniusinahidrelétrica" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="fossasépticabiodigestora" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="centrodecompostagem" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="painelsolar" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="sistemaagroflorestal" class="upgrade-hall-child" style="display: none;"></div>
-			<div id="satélite" class="upgrade-hall-child" style="display: none;"></div>
-		</div>
-		<div class="news-div" style="text-align: center;">
-			<h1 class="news-title">Notícias</h1>
-			<button class="newsContainer" style="height: 200px; font-size: x-large; border: none; background-color: aquamarine;">
-				<h1 id="newsButtonText">Save the fuckin little ribeiro</h1>
-			</button>
-		</div>
-		<div class="status-div">
-			<div class="status-menu">
-				<div class="status-label status jersey-25-regular">Status</div>
-				<div class="status-label achievements">Conquistas</div>
-				<div class="status-label misc">Misc.</div>
-			</div>
-			<div class="status-content">
-				<div id="status-list">	
-					<div>Pontos : <b class="cookieDisplay">0</b></div>
-					<div>Pontos por clique : <b class="cpcDisplay">0</b></div>
-					<div>Pontos por segundo : <b class="cpsDisplay">0</b></div>
-					<div>Adquiridos : <b class="earnedDisplay">0</b></div>
-					<div>Gastos : <b class="spentDisplay">0</b></div>
-					<div>Clicados : <b class="clickedDisplay">0</b></div>
-				</div>
-				<div id="achievements-list" class="achievements-list" style="display: none;"></div>
-				<div id="misc-list" style="display: none;"></div>
-			</div>
-		</div>
-	</div>
+    <div
+      id="bottom-content"
+      style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 20px;
+        gap: 20px;
+      "
+    >
+      <div class="upgrade-hall-container">
+        <div
+          id="voluntário"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="miniusinahidrelétrica"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="fossasépticabiodigestora"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="centrodecompostagem"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="painelsolar"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="sistemaagroflorestal"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+        <div
+          id="satélite"
+          class="upgrade-hall-child"
+          style="display: none"
+        ></div>
+      </div>
+      <div class="news-div" style="text-align: center">
+        <h1 class="news-title">Notícias</h1>
+        <button
+          class="newsContainer"
+          style="
+            height: 200px;
+            font-size: x-large;
+            border: none;
+            background-color: aquamarine;
+          "
+        >
+          <h1 id="newsButtonText">Save the fuckin little ribeiro</h1>
+        </button>
+      </div>
+      <div class="status-div">
+        <div class="status-menu">
+          <div class="status-label status jersey-25-regular">Status</div>
+          <div class="status-label achievements">Conquistas</div>
+          <div class="status-label misc">Misc.</div>
+        </div>
+        <div class="status-content">
+          <div id="status-list">
+            <div>Pontos : <b class="cookieDisplay">0</b></div>
+            <div>Pontos por clique : <b class="cpcDisplay">0</b></div>
+            <div>Pontos por segundo : <b class="cpsDisplay">0</b></div>
+            <div>Adquiridos : <b class="earnedDisplay">0</b></div>
+            <div>Gastos : <b class="spentDisplay">0</b></div>
+            <div>Clicados : <b class="clickedDisplay">0</b></div>
+          </div>
+          <div
+            id="achievements-list"
+            class="achievements-list"
+            style="display: none"
+          ></div>
+          <div id="misc-list" style="display: none"></div>
+        </div>
+      </div>
+    </div>
 
-
-	<script src="js/base64.js"></script>
-	<script src="js/game.js"></script>
-</body>
-
+    <script src="js/base64.js"></script>
+    <script src="js/game.js"></script>
+  </body>
 </html>
