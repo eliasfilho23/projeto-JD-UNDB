@@ -492,126 +492,6 @@ class Challenges {
     }
   }
 }
-class Achievements {
-  achievements = [
-    {
-      name: "Cookie Amateur",
-      status: "disabled",
-      description: "Fez 15 cookies",
-      trigger: "limit",
-      triggerDetail: 1,
-    },
-    {
-      name: "Cookie Enjoyer",
-      status: "disabled",
-      description: "Fez 20 cookies",
-      trigger: "limit",
-      triggerDetail: 20,
-    },
-    {
-      name: "Cookie Entrepreneur",
-      status: "disabled",
-      description: "Fez 50 cookies",
-      trigger: "limit",
-      triggerDetail: 50,
-    },
-    {
-      name: "Cookie Racist",
-      status: "disabled",
-      description: "Fez 100 cookies",
-      trigger: "limit",
-      triggerDetail: 100,
-    },
-    {
-      name: "Cookie Jeffrey Epstein",
-      status: "disabled",
-      description: "Fez 150 cookies",
-      trigger: "limit",
-      triggerDetail: 150,
-    },
-    {
-      name: "Cookie Drake Bell",
-      status: "disabled",
-      description: "Fez 200 cookies",
-      trigger: "limit",
-      triggerDetail: 200,
-    },
-    {
-      name: "Cookie Drake",
-      status: "disabled",
-      description: "Fez 500 cookies",
-      trigger: "limit",
-      triggerDetail: 500,
-    },
-    {
-      name: "Cookie P Diddy",
-      status: "disabled",
-      description: "Fez 1000 cookies",
-      trigger: "limit",
-      triggerDetail: 1000,
-    },
-  ];
-
-//   relateAchievementsStatus() {
-//     let relation = "";
-//     this.achievements.map((ac) => {
-//       ac.status === "disabled" ? (relation += "0") : (relation += "1");
-//     });
-//     return relation;
-//   }
-
-  updateAchievementHTML() {
-    let finalHtml = "";
-    // const currentStatusTitle = document.getElementsByClassName('current-status-label')[0]
-    // currentStatusTitle.innerHTML = 'Conquistas'
-    this.achievements.forEach((ac) => {
-      if (ac.status === "enabled") {
-        finalHtml += `<div style='color: white; text-shadow: 3px 3px 10px black;' class='achievement-list-child'>
-                    <h3>${ac.name}</h3>
-                    <div>${ac.description}</div>
-                </div>`;
-      }
-    });
-    game.utilities.updateText("achievements-list", finalHtml);
-    // this.relateAchievementsStatus();
-  }
-
-  achievementTriggerListener() {
-    const currentCookies = game.player.cookieStats.Earned;
-    const achievementPopUpDiv = document.getElementsByClassName('currentAchievementPopUp')[0]
-    this.achievements.forEach((ac) => {
-      if (ac.trigger === "limit" && ac.status === "disabled") {
-        currentCookies >= ac.triggerDetail
-          ? ((ac.status = "enabled"),
-          achievementPopUpDiv.innerHTML = (`
-        <div class="achievement-pop-up" id="pop-up">
-            <div class="achievement-pop-up-content">
-                    <h1>Conquista Desbloqueada!</h1>
-                    <h3>${ac.name}</h3>
-                    <p>${ac.description}</p>
-                    <button class='achievement-pop-up-btn' type="button">X</button>
-            </div>
-          </div>`)): "";
-      }
-    });
-    const achievementPopUp = document.getElementsByClassName('achievement-pop-up-btn')[0]
-    achievementPopUp.addEventListener('click', () => {
-      achievementPopUpDiv.innerHTML = ''
-    })
-    console.log(achievementPopUpDiv.innerHTML) 
-    this.updateAchievementHTML();
-  }
-
-  constructAchievements() {
-    const currentCookies = game.player.cookieStats.Earned;
-    this.achievements.forEach((ac) => {
-      if (ac.trigger === "limit" && ac.status === "disabled") {
-        currentCookies >= ac.triggerDetail ? (ac.status = "enabled") : "";
-      }
-    });
-    this.updateAchievementHTML();
-  }
-}
 class Player {
   constructor() {
     this.cookies = 0;
@@ -649,8 +529,334 @@ let game = {
     recalculateCPS: true,
     key: "cookieclicker",
   },
+  achievements: [
+    {
+      name: "Cada ajuda é significativa",
+      status: "disabled",
+      description: "Adquiriu um ponto de notoriedade",
+      trigger: "limit",
+      triggerDetail: 1,
+    },
+    {
+      name: "Amigo da causa",
+      status: "disabled",
+      description: "Adquiriu 25 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 25,
+    },
+    {
+      name: "Bolso generoso para a amazônia",
+      status: "disabled",
+      description: "Adquiriu 100 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 100,
+    },
+    {
+      name: "Começando o impacto",
+      status: "disabled",
+      description: "Adquiriu 500 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 500,
+    },
+    {
+      name: "Mobilizador da causa",
+      status: "disabled",
+      description: "Adquiriu 1000 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 1000,
+    },
+    {
+      name: "Garoto-propaganda da NAPRA",
+      status: "disabled",
+      description: "Adquiriu 2500 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 2500,
+    },
+    {
+      name: "You gotta go far, kid",
+      status: "disabled",
+      description: "Adquiriu 5000 pontos de notoriedade",
+      trigger: "limit",
+      triggerDetail: 5000,
+    },
+    {
+      name: "Inspiração do Joe Duplantier",
+      status: "disabled",
+      description: "Fez 1000 cookies",
+      trigger: "limit",
+      triggerDetail: 10000,
+    },
+    {
+      name: "Qualquer ajuda conta",
+      status: "disabled",
+      description: "Financiou um voluntário",
+      trigger: "buildingLimit",
+      triggerDetail: ['Voluntário', 1],
+    },
+    {
+      name: "Inspirador",
+      status: "disabled",
+      description: "Financiou 10 voluntários",
+      trigger: "buildingLimit",
+      triggerDetail: ['Voluntário', 10],
+    },
+    {
+      name: "Aprendendo a influenciar",
+      status: "disabled",
+      description: "Financiou 25 voluntários",
+      trigger: "buildingLimit",
+      triggerDetail: ['Voluntário', 25],
+    },
+    {
+      name: "Mobilizador de comunidades",
+      status: "disabled",
+      description: "Financiou 50 voluntários",
+      trigger: "buildingLimit",
+      triggerDetail: ['Voluntário', 50],
+    },
+    {
+      name: "Manus Populi, Vox Populi",
+      status: "disabled",
+      description: "Financiou 100 voluntários",
+      trigger: "buildingLimit",
+      triggerDetail: ['Voluntário', 100],
+    },
+    {
+      name: "Mini instalação, Enorme ajuda",
+      status: "disabled",
+      description: "Financiou uma mini-usina hidrelétrica",
+      trigger: "buildingLimit",
+      triggerDetail: ['Mini usina hidrelétrica', 1],
+    },
+    {
+      name: "Cobertura de alguma parcela",
+      status: "disabled",
+      description: "Financiou 10 mini-usinas hidrelétricas",
+      trigger: "buildingLimit",
+      triggerDetail: ['Mini usina hidrelétrica', 10],
+    },
+    {
+      name: "Contrato com distribuidora",
+      status: "disabled",
+      description: "Financiou 25 mini-usina hidrelétricas",
+      trigger: "buildingLimit",
+      triggerDetail: ['Mini usina hidrelétrica', 25],
+    },
+    {
+      name: "Fornecimento integral",
+      status: "disabled",
+      description: "Financiou 50 mini-usina hidrelétricas",
+      trigger: "buildingLimit",
+      triggerDetail: ['Mini usina hidrelétrica', 50],
+    },
+    {
+      name: "Revolução hidrelétrica",
+      status: "disabled",
+      description: "Financiou 100 mini-usina hidrelétricas",
+      trigger: "buildingLimit",
+      triggerDetail: ['Mini usina hidrelétrica', 100],
+    },
+    {
+      name: "Na natureza, nada se cria",
+      status: "disabled",
+      description: "Financiou uma fossa séptica biodigestora",
+      trigger: "buildingLimit",
+      triggerDetail: ['Fossa séptica biodigestora', 1],
+    },
+    {
+      name: "Uma boa quantidade",
+      status: "disabled",
+      description: "Financiou 10 fossas sépticas biodigestoras",
+      trigger: "buildingLimit",
+      triggerDetail: ['Fossa séptica biodigestora', 10],
+    },
+    {
+      name: "Tratamento completo e eficiente",
+      status: "disabled",
+      description: "Financiou 25 fossas sépticas biodigestoras",
+      trigger: "buildingLimit",
+      triggerDetail: ['Fossa séptica biodigestora', 25],
+    },
+    {
+      name: "Definitivamente, muito adubo",
+      status: "disabled",
+      description: "Financiou 50 fossas sépticas biodigestoras",
+      trigger: "buildingLimit",
+      triggerDetail: ['Fossa séptica biodigestora', 50],
+    },
+    {
+      name: "Potestas Feces",
+      status: "disabled",
+      description: "Financiou 100 fossas sépticas biodigestoras",
+      trigger: "buildingLimit",
+      triggerDetail: ['Fossa séptica biodigestora', 100],
+    },
+    {
+      name: "Dá pra ver a minha casa daqui",
+      status: "disabled",
+      description: "Financiou um satélite",
+      trigger: "buildingLimit",
+      triggerDetail: ['Satélite', 1],
+    },
+    {
+      name: "Corrida Espacial",
+      status: "disabled",
+      description: "Financiou 10 satélites",
+      trigger: "buildingLimit",
+      triggerDetail: ['Satélite', 10],
+    },
+    {
+      name: "Serjão ficaria orgulhoso",
+      status: "disabled",
+      description: "Financiou 25 satélites",
+      trigger: "buildingLimit",
+      triggerDetail: ['Satélite', 25],
+    },
+    {
+      name: "FYI, a imagem do satélite é literalmente um easter egg",
+      status: "disabled",
+      description: "Financiou 50 satélites",
+      trigger: "buildingLimit",
+      triggerDetail: ['Satélite', 50],
+    },
+    {
+      name: "A terra não é sua para conquistar. Mas o espaço...",
+      status: "disabled",
+      description: "Financiou 100 satélites",
+      trigger: "buildingLimit",
+      triggerDetail: ['Satélite', 100],
+    },
+    {
+      name: "Guaraci financiando o esquema",
+      status: "disabled",
+      description: "Financiou um painel solar",
+      trigger: "buildingLimit",
+      triggerDetail: ['Painel solar', 1],
+    },
+    {
+      name: "Here Comes The Sun",
+      status: "disabled",
+      description: "Financiou 10 painéis solares",
+      trigger: "buildingLimit",
+      triggerDetail: ['Painel solar', 10],
+    },
+    {
+      name: "Praise the Sun",
+      status: "disabled",
+      description: "Financiou 25 painéis solares",
+      trigger: "buildingLimit",
+      triggerDetail: ['Painel solar', 25],
+    },
+    {
+      name: "Pique HELIOS One",
+      status: "disabled",
+      description: "Financiou 50 painéis solares",
+      trigger: "buildingLimit",
+      triggerDetail: ['Painel solar', 50],
+    },
+    {
+      name: "O poder do sol, na palma da minha mão",
+      status: "disabled",
+      description: "Financiou 100 painéis solares",
+      trigger: "buildingLimit",
+      triggerDetail: ['Painel solar', 100],
+    },
+  ],
+
+//   relateAchievementsStatus() {
+//     let relation = "";
+//     this.achievements.map((ac) => {
+//       ac.status === "disabled" ? (relation += "0") : (relation += "1");
+//     });
+//     return relation;
+//   }
+
+  updateAchievementHTML() {
+    let finalHtml = "";
+    // const currentStatusTitle = document.getElementsByClassName('current-status-label')[0]
+    // currentStatusTitle.innerHTML = 'Conquistas'
+    this.achievements.forEach((ac) => {
+      if (ac.status === "enabled") {
+        finalHtml += `<div style='color: white; text-shadow: 3px 3px 10px black;' class='cookie-achievement-list-child'>
+                    <h3>${ac.name}</h3>
+                    <div>${ac.description}</div>
+                </div>`;
+      }
+    });
+    game.utilities.updateText("achievements-list", finalHtml);
+    // this.relateAchievementsStatus();
+  },
+
+  totalCookiesAchievementTriggerListener() {
+    const currentCookies = game.player.cookieStats.Earned;
+    const achievementPopUpDiv = document.getElementsByClassName('currentAchievementPopUp')[0]
+    this.achievements.forEach((ac) => {
+      if (ac.trigger === "limit" && ac.status === "disabled") {
+        currentCookies >= ac.triggerDetail
+          ? ((ac.status = "enabled"),
+          achievementPopUpDiv.innerHTML = (`
+        <div class="achievement-pop-up" id="pop-up">
+            <div class="achievement-pop-up-content">
+                    <h1>Conquista Desbloqueada!</h1>
+                    <h3>${ac.name}</h3>
+                    <p>${ac.description}</p>
+                    <button class='achievement-pop-up-btn' type="button">X</button>
+            </div>
+          </div>`)): "";
+      }
+    });
+    const achievementPopUp = document.getElementsByClassName('achievement-pop-up-btn')[0]
+    achievementPopUp && achievementPopUp.addEventListener('click', () => {
+      achievementPopUpDiv.innerHTML = ''
+    })
+    this.updateAchievementHTML();
+  },
+
+  buildingBuyingAchievementTriggerListener(building) {
+    console.log(building)
+    const achievementPopUpDiv = document.getElementsByClassName('currentAchievementPopUp')[0]
+    this.achievements.forEach((ac) => {
+      if (ac.trigger === "buildingLimit" && ac.status === "disabled"){
+        building.amount >= ac.triggerDetail[1] && building.name === ac.triggerDetail[0] ?
+        ((ac.status = "enabled"),
+        achievementPopUpDiv.innerHTML = (`
+      <div class="achievement-pop-up" id="pop-up">
+          <div class="achievement-pop-up-content">
+                  <h1>Conquista Desbloqueada!</h1>
+                  <h3>${ac.name}</h3>
+                  <p>${ac.description}</p>
+                  <button class='achievement-pop-up-btn' type="button">X</button>
+          </div>
+        </div>`)): "";
+      }
+    })
+    const achievementPopUp = document.getElementsByClassName('achievement-pop-up-btn')[0]
+    achievementPopUp && achievementPopUp.addEventListener('click', () => {
+      achievementPopUpDiv.innerHTML = ''
+    })
+    this.updateAchievementHTML();
+  },
+ 
+  constructAchievements() {
+    const currentCookies = game.player.cookieStats.Earned;
+
+    this.achievements.forEach((ac) => {
+      if (ac.trigger === "limit" && ac.status === "disabled") {
+        currentCookies >= ac.triggerDetail ? (ac.status = "enabled") : "";
+      }
+      if (ac.trigger === "buildingLimit" && ac.status === "disabled") {
+        game.buildings.forEach((el) => {
+          if (el.name === ac.triggerDetail[0] && el.amount >= ac.triggerDetail[1]) {
+            ac.status = 'enabled'
+          } else ''
+        })
+      }
+    });
+    this.updateAchievementHTML();
+  },
 
   challengeActions: new Challenges(),
+
   news: {
     defaultNewsArray: [
       { news: "lorem ipsum 1", limit: 10 },
@@ -1780,6 +1986,11 @@ let game = {
       });
       return correctBuilding;
     },
+    printBuildings() {
+      game.buildings.forEach((b) => {
+        console.log(b)
+      })
+    },
     getBuildingIndexByName(name) {
       for (let i = 0; i < game.buildings.length - 1; i++) {
         let curBuilding = game.buildings[i];
@@ -1945,7 +2156,6 @@ let game = {
       }
     },
   },
-  achievement: new Achievements(),
   player: new Player(),
   upgradeHall: new UpgradeHall(),
   giveCookies(num) {
@@ -1976,7 +2186,7 @@ let game = {
 
     updateLogic() {
       setInterval(() => {
-        game.achievement.achievementTriggerListener();
+        game.totalCookiesAchievementTriggerListener();
       }, 1000);
     },
 
@@ -2053,6 +2263,8 @@ let game = {
   buyBuilding(name, amount) {
     let building = game.utilities.getBuildingByName(name);
     building.buy(amount);
+    this.buildingBuyingAchievementTriggerListener(building)
+    console.log(building)
   },
   buyUpgrade(buildingName, upgrade) {
     let building = game.utilities.getBuildingByName(buildingName);
@@ -2094,10 +2306,9 @@ let game = {
     game.challengeActions.initChallengeRelation();
     game.challengeActions.handleChallengeDisplay();
     game.handleMenuChange();
-
     game.constructShop();
     game.constructNews();
-    game.achievement.constructAchievements();
+    game.constructAchievements()
     game.logic.clickAndShopLogic();
     game.logic.newsLogic();
     game.logic.updateLogic();
