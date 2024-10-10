@@ -21,6 +21,14 @@ h1 {
     padding-top: 8px;
 }
 
+.newsContainer {
+    font-family: 'Jersey 25';
+    font-size: 35px;
+    padding: 70px;
+    color: white;
+    background-color: darkslateblue;
+}
+
 .news-div {
     color: white;
     letter-spacing: 2px;
@@ -104,7 +112,11 @@ h1 {
 }
 
 .challengeDiv {
-    background-color: pink;
+    background-image: url('/images/div-bg-3.png');
+    border-width: 20px; 
+    border-style: solid; 
+    border-image: url('/images/border-5.png') 100 fill;
+    color: white;
     position: absolute;
     display: flex;
     gap: 20px;
@@ -306,12 +318,12 @@ h1 {
     margin:auto;
     min-height:35px;
     color:rgb(255, 255, 255);
-    background-color:rgb(66, 135, 245);
+    background-color:rgb(198, 68, 3);
     font-weight:bolder;
-    border: 2px solid rgb(38, 89, 171);
+    border: 2px solid rgb(60, 13, 1);
     border-radius:5px;
     outline:none;
-    box-shadow: 0px 3px rgb(22, 59, 120);
+    box-shadow: 0px 3px rgb(24, 8, 1);
 }
 
 .shopList button:hover {
