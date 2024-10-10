@@ -117,7 +117,7 @@ class Building {
                 } else {
                     if (notMet == false) {
                         notMet = true;
-                        html += `</br><button class="upgNext">Próxima melhoria desbloqueada para compra em <b>${upgrade.limit - this.amount}</b> ${this.name.toLowerCase()}(s)</button>`;
+                        html += `</br><button class="upgNext">Next upgrade in <b>${upgrade.limit - this.amount}</b> more ${this.name.toLowerCase()}(s)</button>`;
                     }
                 }
             }
@@ -160,6 +160,7 @@ class UpgradeHall {
                 el.name = el.name.toLowerCase().split(" ").join("")
             }
         })
+        console.log(buildingStats)
         const relationIdAmount = []
         for(let i = 0; i < this.upgradeHallHTMLSections.length; i++){
             if(this.upgradeHallHTMLSections[i]){
@@ -271,7 +272,7 @@ class Challenges {
             challengeDiv.innerHTML = (
              `<div class='challengeDivTitle'>Pergunta numero 1</div>
              <div class='challengeDivContent'>
-                <img class='challengeDivImg' src='images/ri3.jpeg'/>
+                <img class='challengeDivImg' src='images/cookie.png'/>
                 <div class='challengeDivText'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
                     Ut sit amet nulla a turpis rhoncus blandit non et eros.
@@ -538,6 +539,7 @@ let game = {
             { "news": "lucario", "limit": 10000 },
         ],
 
+        
         generateNews() {
             const totalCookies = game.player.cookieStats.Earned
             const regularNews = []
@@ -553,13 +555,13 @@ let game = {
                 }
             })
             // 3 - 2 (being both milestone the same entry)
-            const enabledNews = [ 
-                regularNews[(regularNews.length)-1],
-                regularNews[(regularNews.length)-2],
-                regularNews[(regularNews.length)-3],
-                milestoneNews[(milestoneNews.length)-1],
+            enabledNews= [ 
+                regularNews[regularNews.length-1],
+                regularNews[regularNews.length-2],
+                regularNews[regularNews.length-3],
+                milestoneNews[milestoneNews.length-1],
+                milestoneNews[milestoneNews.length-1],
             ]
-            console.log(regularNews)
             return enabledNews;
         },
     },
@@ -586,9 +588,9 @@ let game = {
     buildings: [
         // Generate all buildings here
         new Building('Voluntário', 15, 0.1, [
-            new Upgrade('Luvas reforçadas', 100, 'Voluntários e pontos por clique são duas vezes mais eficientes', 1),
-            new Upgrade('Carrinho de mão robusto', 500, 'Voluntários e pontos por clique são duas vezes mais eficientes', 1),
-            new Upgrade('Rede de coleta comunitária', 10000, 'Voluntários e pontos por clique são duas vezes mais eficientes', 10),
+            new Upgrade('Luvas reforçadas', 100, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 1),
+            new Upgrade('Carrinho de mão robusto', 500, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 1),
+            new Upgrade('Rede de coleta comunitária', 10000, 'Voluntários e coleta de lixo são duas vezes mais eficientes', 10),
             new Upgrade('Veículo de coleta', 100000, 'Voluntários ganham +0.1 pontos de notoriedade por cada building não voluntário', 25, 0.1),
             new Upgrade('Parceria com ONGs', 10000000, 'Voluntários ganham +0.5 pontos de notoriedade por cada building não voluntário', 50, 0.5),
             new Upgrade('Caminhão de coleta automatizado', 100000000, 'Voluntários ganham +5 pontos de notoriedade por cada building não voluntário', 100, 5),
@@ -1028,12 +1030,13 @@ let game = {
         updateText('spentDisplay', format(stats.Spent));
         updateText('clickedDisplay', format(stats.Clicked));
         this.images.changeImage(game.player.cookieStats.Earned)
+        enableNews === 'enabled' && this.constructNews()
     },
     constructNews () {
         const newsArr = game.news.generateNews()
         let currentNews = [];
-        newsArr[0] ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)]] : ''
-        newsArr[0] && game.utilities.updateText('newsContainer', currentNews[0])
+        newsArr.length > 0 ? currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)]] : ''
+        newsArr.length > 0 && game.utilities.updateText('newsContainer', currentNews[0])
     },
     constructShop () {
         let buildings = game.buildings;
