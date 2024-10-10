@@ -499,7 +499,7 @@ class Achievements {
       status: "disabled",
       description: "Fez 15 cookies",
       trigger: "limit",
-      triggerDetail: 15,
+      triggerDetail: 1,
     },
     {
       name: "Cookie Enjoyer",
@@ -552,13 +552,13 @@ class Achievements {
     },
   ];
 
-  relateAchievementsStatus() {
-    let relation = "";
-    this.achievements.map((ac) => {
-      ac.status === "disabled" ? (relation += "0") : (relation += "1");
-    });
-    return relation;
-  }
+//   relateAchievementsStatus() {
+//     let relation = "";
+//     this.achievements.map((ac) => {
+//       ac.status === "disabled" ? (relation += "0") : (relation += "1");
+//     });
+//     return relation;
+//   }
 
   updateAchievementHTML() {
     let finalHtml = "";
@@ -573,20 +573,32 @@ class Achievements {
       }
     });
     game.utilities.updateText("achievements-list", finalHtml);
-    this.relateAchievementsStatus();
+    // this.relateAchievementsStatus();
   }
 
   achievementTriggerListener() {
     const currentCookies = game.player.cookieStats.Earned;
+    const achievementPopUpDiv = document.getElementsByClassName('currentAchievementPopUp')[0]
     this.achievements.forEach((ac) => {
       if (ac.trigger === "limit" && ac.status === "disabled") {
         currentCookies >= ac.triggerDetail
           ? ((ac.status = "enabled"),
-            alert(`Conquista desbloqueada:
-                         ${ac.name}: ${ac.description}`))
-          : "";
+          achievementPopUpDiv.innerHTML = (`
+        <div class="achievement-pop-up" id="pop-up">
+            <div class="achievement-pop-up-content">
+                    <h1>Conquista Desbloqueada!</h1>
+                    <h3>${ac.name}</h3>
+                    <p>${ac.description}</p>
+                    <button class='achievement-pop-up-btn' type="button">X</button>
+            </div>
+          </div>`)): "";
       }
     });
+    const achievementPopUp = document.getElementsByClassName('achievement-pop-up-btn')[0]
+    achievementPopUp.addEventListener('click', () => {
+      achievementPopUpDiv.innerHTML = ''
+    })
+    console.log(achievementPopUpDiv.innerHTML) 
     this.updateAchievementHTML();
   }
 
