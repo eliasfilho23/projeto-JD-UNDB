@@ -646,12 +646,12 @@ let game = {
       { news: "dolor sit amet 3", limit: 40 },
       { news: "consectetur adipiscing 4", limit: 70 },
       { news: "elit sed do 5", limit: 110 },
-      { news: "eiusmod tempor 6", limit: 160 },
+      { news: "A instalação de painéis solares reduz os custos de energia, e as famílias se sentem mais empoderadas em suas escolhas.", limit: 160 },
       { news: "incididunt ut 7", limit: 220 },
       { news: "labore et dolore 8", limit: 290 },
       { news: "magna aliqua 9", limit: 370 },
       { news: "ut enim ad 10", limit: 460 },
-      { news: "minim veniam 11", limit: 560 },
+      { news: "As fossas biodigestoras transformam a saúde das comunidades, e a qualidade de vida melhora significativamente", limit: 560 },
     ],
     milestoneNewsArray: [
       { news: "pikachu", limit: 100 },
@@ -662,8 +662,13 @@ let game = {
 
     generateNews() {
       const totalCookies = game.player.cookieStats.Earned;
-      const regularNews = [];
-      const milestoneNews = [];
+      const regularNews = [
+      { news: "lorem default 1", limit: 0 },
+      { news: "lorem default 2", limit: 0 },
+      ];
+      const milestoneNews = [
+        { news: "magmortar", limit: 0 },
+      ];
       this.defaultNewsArray.forEach((el) => {
         if (el.limit <= totalCookies) {
           regularNews.push(el);
@@ -678,8 +683,6 @@ let game = {
       enabledNews = [
         regularNews[regularNews.length - 1],
         regularNews[regularNews.length - 2],
-        regularNews[regularNews.length - 3],
-        milestoneNews[milestoneNews.length - 1],
         milestoneNews[milestoneNews.length - 1],
       ];
       return enabledNews;
@@ -2013,11 +2016,15 @@ let game = {
   constructNews() {
     const newsArr = game.news.generateNews();
     let currentNews = [];
+    if(this.player.cookieStats.Earned === 0) {
+        game.utilities.updateText("newsContainer", 'Clique no botão de doar para começar a fazer a diferença.');
+    } else {
     newsArr.length > 0
       ? (currentNews = [newsArr[Math.floor(Math.random() * newsArr.length)]])
       : "";
-    newsArr.length > 0 &&
-      game.utilities.updateText("newsContainer", currentNews[0]);
+    newsArr.length > 0 
+      game.utilities.updateText("newsContainer", currentNews[0].news);
+    }
   },
   constructShop() {
     let buildings = game.buildings;

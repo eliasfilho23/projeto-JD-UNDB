@@ -44,10 +44,19 @@ h1 {
   grid-template-rows: 10% 80%;
   justify-content: center;
   align-items: center;
-  background-color: rgb(84, 23, 90);
+  background-image: url("/images/div-bg-6.png");
   border-width: 32px;
   border-style: solid;
   border-image: url("/images/border-5.png") 150 fill;
+}
+
+.newsContainer {
+  height: 50%;
+  font-family: 'Jersey 25';
+  font-size: 40px;
+  border: none;
+  background-image: url("/images/div-bg-6.png");
+  color: white;
 }
 
 .news-title {
