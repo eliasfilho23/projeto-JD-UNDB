@@ -773,7 +773,7 @@ let game = {
 
   updateAchievementHTML() {
     let finalHtml = "";
-    // const currentStatusTitle = document.getElementsByClassName('current-status-label')[0]
+    const achievementHeader = document.getElementsByClassName('achievement-list-header')[0]
     // currentStatusTitle.innerHTML = 'Conquistas'
     this.achievements.forEach((ac) => {
       if (ac.status === "enabled") {
@@ -784,6 +784,7 @@ let game = {
       }
     });
     game.utilities.updateText("achievements-list", finalHtml);
+    achievementHeader.s
     // this.relateAchievementsStatus();
   },
 
@@ -839,7 +840,6 @@ let game = {
  
   constructAchievements() {
     const currentCookies = game.player.cookieStats.Earned;
-
     this.achievements.forEach((ac) => {
       if (ac.trigger === "limit" && ac.status === "disabled") {
         currentCookies >= ac.triggerDetail ? (ac.status = "enabled") : "";
@@ -920,12 +920,25 @@ let game = {
 
   handleMenuChange() {
     const elements = document.getElementsByClassName("status-label");
+    const achievementContainerHeader = document.getElementsByClassName('achievement-list-header')[0]
+    const {enabledAc, totalAc} = game.utilities.getAchievementRelation()
+
     for (let i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", () => {
         const currentListElement = document.getElementById(
           `${elements[i].className.split(" ")[1]}-list`
         );
         this.handleStatsToggle(currentListElement);
+        if(currentListElement.id === 'achievements-list') {
+          achievementContainerHeader.innerHTML =(
+            `<div style='color: white; font-size:20px; margin-top: 20px'>
+            Conquistas adquiridas: ${enabledAc} de ${totalAc} <span style='font-size: 30px'>
+            (${(enabledAc / (totalAc/100)).toFixed(2)}%)</span>
+            </div>`
+          )
+        } else {
+          achievementContainerHeader.innerHTML = ''
+        }
       });
     }
   },
@@ -1976,6 +1989,15 @@ let game = {
       }
       return (Math.trunc(number * 10) / 10).toFixed(1);
     },
+    getAchievementRelation() {
+      let enabledAc = 0
+      game.achievements.forEach((ac) => {
+        if (ac.status == 'enabled') {
+          enabledAc += 1
+        }
+      })
+      return {enabledAc, totalAc: game.achievements.length}
+    },
     getBuildingByName(name) {
       let correctBuilding = null;
       game.buildings.forEach((building) => {
@@ -2305,7 +2327,6 @@ let game = {
 
     game.challengeActions.initChallengeRelation();
     game.challengeActions.handleChallengeDisplay();
-    game.handleMenuChange();
     game.constructShop();
     game.constructNews();
     game.constructAchievements()
@@ -2313,7 +2334,9 @@ let game = {
     game.logic.newsLogic();
     game.logic.updateLogic();
     game.images.changeImage();
-  },
+    game.handleMenuChange();
+
+  }
 };
 
 game.start();
