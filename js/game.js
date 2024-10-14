@@ -105,13 +105,17 @@ class Building {
     let html = '<div class="btnBuyGroup">';
     html += `<button onclick="game.buyBuilding('${
       this.name
-    }', 1);">Buy x1</br><b>${format(this.cost)}</b></button>`;
+    }', 1);">Financiar 1 unidade</br><b>${format(this.cost)}</b></button>`;
     html += `<button onclick="game.buyBuilding('${
       this.name
-    }', 5);">Buy x5</br><b>${format(this.getCost(5))}</b></button>`;
+    }', 5);">Financiar 5 unidades</br><b>${format(
+      this.getCost(5)
+    )}</b></button>`;
     html += `<button onclick="game.buyBuilding('${
       this.name
-    }', 10);">Buy x10</br><b>${format(this.getCost(10))}</b></button>`;
+    }', 10);">Financiar 10 unidades</br><b>${format(
+      this.getCost(10)
+    )}</b></button>`;
     html += "</div>";
     return html;
   }
@@ -257,38 +261,78 @@ const challengeDiv = document.getElementById("challenge-div");
 const anwserRelationHTML = [
   {
     limit: 10,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    detail: `
+    O Curupira é uma das figuras mais icônicas do folclore amazônico,
+    conhecido por proteger a floresta e seus animais contra caçadores e desmatadores.
+    Ele é descrito como um ser pequeno, de cabelos vermelhos e pés virados para trás, 
+    o que confunde aqueles que tentam segui-lo. Sua missão é proteger a fauna e flora,
+    punindo aqueles que agem de forma predatória e destrutiva contra a floresta.
+    Essa lenda reflete a reverência das populações amazônicas pela natureza e seu desejo
+    de preservar o ambiente em que vivem, transmitindo uma mensagem de respeito e harmonia com a floresta
+    `,
     alreadyPopped: false,
   },
   {
-    limit: 120,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    limit: 50,
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    falseText: "Resposta Falsa!",
+    detail: `
+      A pesca com tarrafa e armadilhas artesanais é uma prática tradicional entre os ribeirinhos da Amazônia.
+      Essas comunidades dependem fortemente dos rios para sua subsistência, e essas técnicas de pesca são transmitidas de geração em geração.
+      A tarrafa é uma rede circular que é lançada manualmente sobre a água, e as armadilhas,
+      como as matapis (feitas de palha de buriti), são dispositivos artesanais que capturam peixes de maneira sustentável.
+      Essa forma de pesca respeita os ciclos da natureza e permite que as populações ribeirinhas 
+      vivam em harmonia com os recursos aquáticos, sem causar grandes impactos nos ecossistemas fluviais.
+    `,
     alreadyPopped: false,
   },
   {
-    limit: 1000,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    limit: 100,
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    detail: `
+    O tacacá é um prato típico da culinária amazônica, especialmente consumido pelas comunidades ribeirinhas. Ele é feito com ingredientes
+    locais como o tucupi, um caldo amarelo extraído da mandioca brava, e o jambu, uma erva amazônica que causa uma leve dormência na boca.
+    O prato também inclui camarões e goma de tapioca, resultando em uma refeição leve, mas rica em sabores característicos da região.
+    O tacacá reflete a forte conexão dos ribeirinhos com os recursos naturais ao seu redor, aproveitando ingredientes frescos e regionais em sua culinária diária.
+    `,
     alreadyPopped: false,
   },
   {
-    limit: 3000,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    limit: 150,
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    detail: `
+    A farinhada é o processo tradicional de fabricação da farinha de mandioca, que é um alimento essencial na dieta dos ribeirinhos e de muitas outras populações
+    da Amazônia. A farinha de mandioca é feita a partir da mandioca brava, que deve ser processada cuidadosamente para remover o ácido cianídrico, uma substância tóxica.
+    Durante a farinhada, várias etapas são seguidas, como descascar, ralar, prensar e torrar a mandioca, até que se transforme em farinha. Esse processo é muitas vezes comunitário,
+    envolvendo várias famílias que trabalham juntas, e também é uma ocasião social e cultural importante para as comunidades amazônicas.
+    `,
     alreadyPopped: false,
   },
   {
-    limit: 5000,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    limit: 200,
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    detail: `
+    A Festa de São Pedro é uma celebração muito importante para as comunidades ribeirinhas da Amazônia,
+    já que São Pedro é considerado o padroeiro dos pescadores. Essa festa acontece geralmente no final de junho
+    e é uma forma de agradecer pelos peixes capturados e pedir proteção para futuras pescas. Durante o evento, 
+    há procissões, missas e também festividades populares que incluem danças, músicas e comidas típicas. 
+    A festa reflete a forte dependência dos ribeirinhos em relação ao rio, que é fonte de alimento, transporte e cultura,
+    e demonstra sua gratidão e respeito pelos ciclos naturais das águas e dos peixes.
+    `,
     alreadyPopped: false,
   },
   {
-    limit: 10000,
-    true: "resposta correta!",
-    false: "resposta falsa!",
+    limit: 300,
+    trueText: "Resposta Correta!",
+    falseText: "Resposta Falsa!",
+    detail: `
+    `,
     alreadyPopped: false,
   },
 ];
@@ -320,102 +364,102 @@ class Challenges {
     challengeDiv.style = "";
     switch (challenge) {
       case 1:
-        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Pergunta numero 1</div>
+        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
                 <div class='challengeDivContent'>
                    <img class='challengeDivImg' src='images/cookie.png'/>
                    <div class='challengeDivText'>
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
-                       Ut sit amet nulla a turpis rhoncus blandit non et eros.
-                       Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
-                       congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
-                       Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
+                       O Curupira é uma figura do folcore amazônico, associado
+                       ao cultivo e preservação do campos agrícolas?
                    condimentum mattis neque. 
                    </div>
                </div>
                 <div class='challengeDivButtons'> 
-                    <button class='challenge1Btns'>Sim</button>
-                    <button class='challenge1Btns'>Não</button>
+                    <button class='challenge1Btns'>Verdadeiro</button>
+                    <button class='challenge1Btns'>Falso</button>
                </div>
                     `;
         break;
       case 2:
-        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Pergunta numero 2</div>
+        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
                     <div class='challengeDivContent'>
                     <img class='challengeDivImg' src='images/cookie.png'/>
                     <div class='challengeDivText'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
-                        Ut sit amet nulla a turpis rhoncus blandit non et eros.
-                        Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
-                        congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
-                        Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
-                    condimentum mattis neque. 
+                        A prática da pesca é essencial para os ribeirinhos da Amazônia.
+                        Qual técnica de pesca tradicional é amplamente utilizada nas comunidades ribeirinhas?
                     </div>
                 </div>
                 <div class='challengeDivButtons'>
-                   <button class='challenge2Btns'>Opcao 1</button>
-                   <button class='challenge2Btns'>Opcao 2</button>
-                   <button class='challenge2Btns'>Opcao 3</button>
-                   <button class='challenge2Btns'>Opcao 4</button>
+                   <button class='challenge2Btns'>Pesca com redes de arrasto</button>
+                   <button class='challenge2Btns'>Pesca com tarrafa e armadilhas artesanais</button>
+                   <button class='challenge2Btns'>Pesca com vara e anzol, isca improvisada</button>
+                   <button class='challenge2Btns'> Pesca com equipamentos eletrônicos de última geração</button>
                 </div>
                 `;
         break;
       case 3:
-        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Pergunta numero 2</div>
+        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
                       <div class='challengeDivContent'>
                       <img class='challengeDivImg' src='images/cookie.png'/>
                       <div class='challengeDivText'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
-                          Ut sit amet nulla a turpis rhoncus blandit non et eros.
-                          Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
-                          congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
-                          Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
-                      condimentum mattis neque. 
+                          A culinária dos ribeirinhos é profundamente influenciada
+                           pelos recursos naturais da floresta. Qual destes pratos típicos
+                            é tradicionalmente consumido nas comunidades amazônicas?
                       </div>
                   </div>
                   <div class='challengeDivButtons'>
-                     <button class='challenge2Btns'>Opcao 1</button>
-                     <button class='challenge2Btns'>Opcao 2</button>
-                     <button class='challenge2Btns'>Opcao 3</button>
-                     <button class='challenge2Btns'>Opcao 4</button>
+                     <button class='challenge3Btns'>Igarapé-do-Mato</button>
+                     <button class='challenge3Btns'>Murici Assado</button>
+                     <button class='challenge3Btns'>Tijé</button>
+                     <button class='challenge3Btns'>Tacacá</button>
                   </div>
                   `;
         break;
       case 4:
-        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Pergunta numero 2</div>
+        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
                         <div class='challengeDivContent'>
                         <img class='challengeDivImg' src='images/cookie.png'/>
                         <div class='challengeDivText'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
-                            Ut sit amet nulla a turpis rhoncus blandit non et eros.
-                            Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
-                            congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
-                            Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
-                        condimentum mattis neque. 
+                          Qual é o nome do costume tradicional amazônico que envolve o preparo e consumo da farinha de mandioca,
+                           um dos alimentos mais importantes para os ribeirinhos?    
                         </div>
                     </div>
                     <div class='challengeDivButtons'>
-                       <button class='challenge2Btns'>Opcao 1</button>
-                       <button class='challenge2Btns'>Opcao 2</button>
-                       <button class='challenge2Btns'>Opcao 3</button>
-                       <button class='challenge2Btns'>Opcao 4</button>
+                       <button class='challenge4Btns'>Farinhada</button>
+                       <button class='challenge4Btns'>Tecelagem do tucum</button>
+                       <button class='challenge4Btns'>Roda de peixe</button>
+                       <button class='challenge4Btns'>elebração do açaí</button>
                     </div>
                     `;
+        break;
+      case 5:
+        challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
+                          <div class='challengeDivContent'>
+                          <img class='challengeDivImg' src='images/cookie.png'/>
+                          <div class='challengeDivText'>
+                            Os ribeirinhos realizam festas e rituais ligados ao ciclo das águas na Amazônia.
+                           Qual destas celebrações marca a relação dos ribeirinhos com o rio e as mudanças de estação?    
+                          </div>
+                      </div>
+                      <div class='challengeDivButtons'>
+                         <button class='challenge5Btns'>Festa de São Pedro, o padroeiro dos pescadores</button>
+                         <button class='challenge5Btns'>Festa da Colheita</button>
+                         <button class='challenge5Btns'>Festa do Pirarucu</button>
+                         <button class='challenge5Btns'>Festa da Pequi</button>
+                      </div>
+                      `;
         break;
     }
   }
 
-  handleChallengeAnwser(challengeHTML, won, amount) {
+  handleChallengeAnwser(challengeHTML, challengeHTMLDetail, won, amount) {
     challengeDiv.innerHTML = `
-            <div class='challengeDivTitle'>
+            <div class='challengeDivTitle' ${
+              won === true ? 'style="color: green"' : 'style="color: red"'
+            }>
             ${challengeHTML}
             </div>
             <div class='challengeDivText'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a mi mauris. 
-                    Ut sit amet nulla a turpis rhoncus blandit non et eros.
-                    Aenean at volutpat sem, non vehicula ex. Donec non enim cursus, 
-                    congue arcu ac, scelerisque ante. Ut condimentum vehicula tincidunt.
-                    Sed ac fringilla ligula. In lorem ex, blandit eu felis at,
-                condimentum mattis neque. 
+            ${challengeHTMLDetail}
             </div>
             ${
               won === true
@@ -445,13 +489,17 @@ class Challenges {
         for (let i = 0; i < challenge1Btns.length; i++) {
           challenge1Btns[i].addEventListener("click", () => {
             i === 1
-              ? (game.player.earnCookie(79),
+              ? (game.player.earnCookie(20),
                 this.handleChallengeAnwser(
-                  anwserRelationHTML[0].true,
+                  anwserRelationHTML[0].trueText,
+                  anwserRelationHTML[0].detail,
                   true,
                   79
                 ))
-              : this.handleChallengeAnwser(anwserRelationHTML[0].false);
+              : this.handleChallengeAnwser(
+                  anwserRelationHTML[0].falseText,
+                  anwserRelationHTML[0].detail
+                );
           });
         }
         break;
@@ -462,13 +510,17 @@ class Challenges {
         for (let i = 0; i < challenge2Btns.length; i++) {
           challenge2Btns[i].addEventListener("click", () => {
             i === 1
-              ? (game.player.earnCookie(79),
+              ? (game.player.earnCookie(20),
                 this.handleChallengeAnwser(
-                  anwserRelationHTML[1].true,
+                  anwserRelationHTML[1].trueText,
+                  anwserRelationHTML[1].detail,
                   true,
                   79
                 ))
-              : this.handleChallengeAnwser(anwserRelationHTML[1].false);
+              : this.handleChallengeAnwser(
+                  anwserRelationHTML[1].falseText,
+                  anwserRelationHTML[1].detail
+                );
           });
         }
         break;
@@ -476,16 +528,61 @@ class Challenges {
         this.generateChallengeHTML(3);
         const challenge3Btns =
           document.getElementsByClassName("challenge3Btns");
-        for (let i = 0; i < challenge2Btns.length; i++) {
-          challenge2Btns[i].addEventListener("click", () => {
-            i === 1
-              ? (game.player.earnCookie(79),
+        for (let i = 0; i < challenge3Btns.length; i++) {
+          challenge3Btns[i].addEventListener("click", () => {
+            i === 3
+              ? (game.player.earnCookie(20),
                 this.handleChallengeAnwser(
-                  anwserRelationHTML[1].true,
+                  anwserRelationHTML[2].trueText,
+                  anwserRelationHTML[2].detail,
                   true,
                   79
                 ))
-              : this.handleChallengeAnwser(anwserRelationHTML[1].false);
+              : this.handleChallengeAnwser(
+                  anwserRelationHTML[2].falseText,
+                  anwserRelationHTML[2].detail
+                );
+          });
+        }
+        break;
+      case 4:
+        this.generateChallengeHTML(4);
+        const challenge4Btns =
+          document.getElementsByClassName("challenge4Btns");
+        for (let i = 0; i < challenge4Btns.length; i++) {
+          challenge4Btns[i].addEventListener("click", () => {
+            i === 0
+              ? (game.player.earnCookie(20),
+                this.handleChallengeAnwser(
+                  anwserRelationHTML[3].trueText,
+                  anwserRelationHTML[3].detail,
+                  true,
+                  79
+                ))
+              : this.handleChallengeAnwser(
+                  anwserRelationHTML[3].falseText,
+                  anwserRelationHTML[3].detail
+                );
+          });
+        }
+        break;
+      case 5:
+        this.generateChallengeHTML(5);
+        const challenge5Btns = document.getElementsByClassName("challenge5Btns");
+        for (let i = 0; i < challenge5Btns.length; i++) {
+          challenge5Btns[i].addEventListener("click", () => {
+            i === 0
+              ? (game.player.earnCookie(20),
+                this.handleChallengeAnwser(
+                  anwserRelationHTML[4].trueText,
+                  anwserRelationHTML[4].detail,
+                  true,
+                  79
+                ))
+              : this.handleChallengeAnwser(
+                  anwserRelationHTML[4].falseText,
+                  anwserRelationHTML[4].detail
+                );
           });
         }
         break;
