@@ -173,9 +173,11 @@ class Building {
   }
 }
 const buildToActivateMethod = new Building();
+
 class UpgradeHall {
   upgradeHallHTMLSections =
     document.getElementsByClassName("upgrade-hall-child");
+
   returnElAmountBySectionId() {
     const buildingStats = buildToActivateMethod.retrieveBuildingStats();
     buildingStats.forEach((el) => {
@@ -206,20 +208,21 @@ class UpgradeHall {
     return relationIdAmount;
   }
 
-  generateHTML() {
+  updateUpgradeHallHTML() {
     const data = this.returnElAmountBySectionId();
+    const relation = {
+      voluntário: "worker",
+      miniusinahidrelétrica: "hydroeletric-plant",
+      fossasépticabiodigestora: "biodigester",
+      centrodecompostagem: "composting-center",
+      satélite: "satellite",
+      painelsolar: "solar-panel",
+      sistemaagroflorestal: "agroforestry-system",
+    };
+
     data &&
       data.forEach((el) => {
         const currentSection = document.getElementById(el.sectionIdAndName);
-        const relation = {
-          voluntário: "worker",
-          miniusinahidrelétrica: "hydroeletric-plant",
-          fossasépticabiodigestora: "biodigester",
-          centrodecompostagem: "composting-center",
-          satélite: "satellite",
-          painelsolar: "solar-panel",
-          sistemaagroflorestal: "agroforestry-system",
-        };
         for (let i = 0; i < el.amount; i++) {
           currentSection.style = "visibility: visible";
           currentSection.childNodes.length !== el.amount
@@ -2222,9 +2225,7 @@ let game = {
     newsLogic() {
       setInterval(() => {
         game.updateDisplays("enabled");
-        game.challengeActions.handleChallengePopUpTrigger();
-
-        game.upgradeHall.generateHTML();
+        game.challengeActions.handleChallengePopUpTrigger()
       }, 3000);
     },
 
@@ -2245,6 +2246,8 @@ let game = {
         game.settings.recalculateCPS = false;
         game.player.aMPF = CPS / game.settings.frameRate;
         game.updateShop(game.currentShop);
+        game.upgradeHall.updateUpgradeHallHTML()
+        console.log('update')
       }
       if (document.hasFocus()) {
         game.player.earnCookie(game.player.aMPF);
