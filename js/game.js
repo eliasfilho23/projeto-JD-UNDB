@@ -2203,9 +2203,9 @@ let game = {
   },
   images: {
     stages: [
-      { limit: 10, image: "./images/ri2.jpeg" },
-      { limit: 20, image: "./images/ri3.jpeg" },
-      { limit: 30, image: "./images/ri4.jpeg" },
+      { limit: 10, image: "./images/left-background/ri2.jpeg" },
+      { limit: 20, image: "./images/left-background/ri3.jpeg" },
+      { limit: 30, image: "./images/left-background/ri4.jpeg" },
     ],
     changeImage(limit) {
       const imageContainer = document.getElementById("left-background");
