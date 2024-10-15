@@ -2203,9 +2203,11 @@ let game = {
   },
   images: {
     stages: [
-      { limit: 10, image: "./images/left-background/ri2.jpeg" },
-      { limit: 20, image: "./images/left-background/ri3.jpeg" },
-      { limit: 30, image: "./images/left-background/ri4.jpeg" },
+      { limit: 100, image: "./images/left-background/1.png" },
+      { limit: 500, image: "./images/left-background/2.png" },
+      { limit: 1000, image: "./images/left-background/3.png" },
+      { limit: 1000, image: "./images/left-background/4.png" },
+      { limit: 1000, image: "./images/left-background/5.png" },
     ],
     changeImage(limit) {
       const imageContainer = document.getElementById("left-background");
