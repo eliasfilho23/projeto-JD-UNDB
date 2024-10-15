@@ -2203,17 +2203,19 @@ let game = {
   },
   images: {
     stages: [
-      { limit: 100, image: "./images/left-background/1.png" },
-      { limit: 500, image: "./images/left-background/2.png" },
-      { limit: 1000, image: "./images/left-background/3.png" },
-      { limit: 1000, image: "./images/left-background/4.png" },
-      { limit: 1000, image: "./images/left-background/5.png" },
+      { limit: 10, image: "./images/left-background/1.png" },
+      { limit: 20, image: "./images/left-background/2.png" },
+      { limit: 30, image: "./images/left-background/3.png" },
+      { limit: 5000, image: "./images/left-background/4.png" },
+      { limit: 10000, image: "./images/left-background/5.png" },
     ],
-    changeImage(limit) {
+    handleImageChange() {
       const imageContainer = document.getElementById("left-background");
-      if (limit > 10) imageContainer.src = this.stages[0].image;
-      if (limit >= 10 && limit < 20) imageContainer.src = this.stages[1].image;
-      if (limit > 20 && limit <= 30) imageContainer.src = this.stages[2].image;
+      const currentCookies = game.player.cookieStats.Earned;
+      if(this.stages[0].limit < currentCookies && this.stages[0].limit !== 10000) {
+        this.stages.shift()
+        imageContainer.src = this.stages[0].image;
+      }
     },
   },
   logic: {
@@ -2271,7 +2273,7 @@ let game = {
     updateText("earnedDisplay", format(stats.Earned));
     updateText("spentDisplay", format(stats.Spent));
     updateText("clickedDisplay", format(stats.Clicked));
-    this.images.changeImage(game.player.cookieStats.Earned);
+    this.images.handleImageChange()
     enableNews === "enabled" && this.constructNews();
   },
   constructNews() {
@@ -2360,8 +2362,8 @@ let game = {
     game.logic.clickAndShopLogic();
     game.logic.newsLogic();
     game.logic.updateLogic();
-    game.images.changeImage();
     game.handleMenuChange();
+    game.images.handleImageChange();
   },
 };
 
