@@ -233,8 +233,8 @@ h1 {
   padding: 50px;
   border-width: 25px;
   border-style: solid;
-  border-image: url("/images/border-5.png") 150 fill;
-  background-image: url("/images/div-bg-6.png");
+  border-image: url("/images/components/border-5.png") 150 fill;
+  background-image: url("/images/components/div-bg-6.png");
   position: absolute;
   display: flex;
   gap: 50px;
@@ -290,8 +290,8 @@ h1 {
   padding: 10px;
   border-width: 25px;
   border-style: solid;
-  border-image: url("/images/border-5.png") 150 fill;
-  background-image: url("/images/div-bg-6.png");
+  border-image: url("/images/components/border-5.png") 150 fill;
+  background-image: url("/images/components/div-bg-6.png");
 }
 
 #left-background {
