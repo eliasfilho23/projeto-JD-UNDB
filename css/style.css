@@ -1,4 +1,4 @@
-body {
+html, body {
   font-family: "Lato", Arial, Helvetica, sans-serif;
   margin: 0;
   font-family: "Jersey 25", sans-serif;
@@ -6,14 +6,17 @@ body {
   font-style: normal;
   letter-spacing: 0.8px;
   background-image: url("../images/components/background-forest.png");
-  background-size: contain;
-  max-height: 100vh;
 }
 
 h1 {
   margin-bottom: 0px;
 }
 
+#bottom-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 1px;
+}
 #achievement-list-header {
   visibility: hidden;
 }
@@ -109,8 +112,8 @@ h1 {
   padding: 30px;
   border-style:solid;
   border-width: 15px;
-  border-image: url("/images/components/border-5.png") 120 fill;
-  background-image: url("/images/components/div-bg-5.png");
+  border-image: url("/images/components/border-green-1.png") 120 fill;
+  background-image: url("/images/components/div-bg-10.png");
   align-self: center;
   justify-self: center;
   text-align: center;
@@ -165,9 +168,8 @@ h1 {
   background-image: url("/images/components/div-bg-5.png");
   display: grid;
   grid-template-rows: 20% 75%;
-  margin: auto;
+  height: 35vh;
   width: 90%;
-  height: 320px;
   border-width: 30px;
   border-style: solid;
   border-image: url("/images/components/border-5.png") 150 fill;
@@ -191,6 +193,7 @@ h1 {
 
 .status-content {
   overflow-y: auto;
+  max-height: 100%;
 }
 
 .cookie-achievement-list-child {
@@ -216,6 +219,7 @@ h1 {
 }
 
 .achievements-list {
+  max-height: 100%;
   grid-row: 2;
   margin-left: 20px;
 }
@@ -415,15 +419,19 @@ h1 {
 
 .shopList {
   width: 259px;
-  float: left;
-  clear: both;
+  /* background-color: pink; */
+  display: flex;
+  flex-direction: column;
+  padding-top: 8%;
+  justify-content: start;
+  align-items: center;
 }
 
 .shopList button {
   display: block;
   width: 85%;
   max-width: 220px;
-  margin: auto;
+  /* margin: auto; */
   min-height: 35px;
   color: rgb(255, 255, 255);
   background-color: rgb(66, 135, 245);
@@ -484,6 +492,7 @@ h1 {
 }
 
 .shopContainer {
+  max-height: 70%;
   margin-top: 30px;
   border-width: 32px;
   border-style: solid;
@@ -650,16 +659,17 @@ button.upgBtn:active {
 }
 
 .upgrade-hall-container {
-  height: 480px;
-  margin: auto;
-  background-color: rgb(115, 66, 17);
+  background-image: url('/images/components/div-bg-blue.png');
+  margin-top: 50px;
+  /* height: 20%;
+  max-height: 100%; */
   width: max-content;
   overflow-y: auto;
   overflow-x: hidden;
-  border-width: 28px;
+  border-width: 15px;
   border-style: solid;
   width: 100%;
-  border-image: url("/images/components/border-5.png") 120 fill;
+  border-image: url("/images/components/border-blue-1.png") 100 fill;
 }
 
 .upgrade-hall-child {
@@ -717,4 +727,6 @@ button.upgBtn:active {
   .saving button.export.wipe {
     right: 10px;
   }
+
+  
 }
