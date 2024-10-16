@@ -229,17 +229,21 @@ h1 {
 }
 
 .challengeDiv {
-  background-color: pink;
+  color: white;
+  padding: 50px;
+  border-width: 25px;
+  border-style: solid;
+  border-image: url("/images/border-5.png") 150 fill;
+  background-image: url("/images/div-bg-6.png");
   position: absolute;
   display: flex;
-  gap: 20px;
+  gap: 50px;
   flex-direction: column;
-  width: 1000px;
-  height: 645px;
   margin: -22% 24%;
 }
 
 .challengeDivTitle {
+  font-size: 45px;
   text-align: center;
   padding: 20px;
 }
@@ -269,16 +273,25 @@ h1 {
 .challengeDivButtons {
   grid-row: 3;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 20px;
   padding: 20px;
 }
 
 .challenge1Btns,
-.challenge2Btns {
-  font-size: large;
-  height: 50px;
-  width: 100px;
+.challenge2Btns,
+.challenge3Btns,
+.challenge4Btns,
+.challenge5Btns {
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
   padding: 10px;
+  border-width: 25px;
+  border-style: solid;
+  border-image: url("/images/border-5.png") 150 fill;
+  background-image: url("/images/div-bg-6.png");
 }
 
 #left-background {
