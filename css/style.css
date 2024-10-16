@@ -12,9 +12,23 @@ h1 {
   margin-bottom: 0px;
 }
 
-#bottom-content {
+#top-content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  height: 540px;
+  padding-right: 20px;
+  padding-left: 20px;
+  align-items: start;
+  justify-content: end;
+  gap: 20px;
+}
+#bottom-content {
+  align-items: start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
   height: 1px;
 }
 #achievement-list-header {
@@ -114,9 +128,7 @@ h1 {
   border-width: 15px;
   border-image: url("/images/components/border-green-1.png") 120 fill;
   background-image: url("/images/components/div-bg-10.png");
-  align-self: center;
-  justify-self: center;
-  text-align: center;
+  margin-top: 60px;
 }
 #status-list {
   display: flex;
@@ -134,7 +146,10 @@ h1 {
   text-shadow: 3px 3px 10px black;
   grid-column: 2;
   display: grid;
+  width: 100%;
+  height: 300px;
   grid-template-rows: 10% 80%;
+  justify-self: center;
   justify-content: center;
   align-items: center;
   background-image: url("/images/components/div-bg-6.png");
@@ -231,7 +246,6 @@ h1 {
 }
 
 .challengeDiv {
-  background-color: pink;
   position: absolute;
   display: flex;
   gap: 20px;
@@ -284,6 +298,7 @@ h1 {
 }
 
 #left-background {
+  height: 500px;
   border-width: 20px;
   border-style: solid;
   border-image: url("/images/components/border-5.png") 100 fill;
@@ -434,22 +449,22 @@ h1 {
   /* margin: auto; */
   min-height: 35px;
   color: rgb(255, 255, 255);
-  background-color: rgb(66, 135, 245);
+  background-color: rgb(173, 18, 1);
   font-weight: bolder;
-  border: 2px solid rgb(38, 89, 171);
+  border: 2px solid rgb(129, 4, 0);
   border-radius: 5px;
   outline: none;
-  box-shadow: 0px 3px rgb(22, 59, 120);
+  box-shadow: 0px 3px rgb(57, 1, 0);
 }
 
 .shopList button:hover {
   transform: translateY(1px);
-  box-shadow: 0px 2px rgb(22, 59, 120);
+  box-shadow: 0px 2px rgb(63, 15, 2);
 }
 
 .shopList button:active {
   transform: translateY(2px);
-  box-shadow: 0px 1px rgb(22, 59, 120);
+  box-shadow: 0px 1px rgb(217, 46, 11);
 }
 
 .shopList button:not(:last-child) {
@@ -457,8 +472,7 @@ h1 {
 }
 
 .shop {
-  float: left;
-  display: block;
+  overflow-y: auto;
   width: 450px;
   color: white;
   text-shadow: 3px 3px 10px black;
@@ -660,15 +674,13 @@ button.upgBtn:active {
 
 .upgrade-hall-container {
   background-image: url('/images/components/div-bg-blue.png');
-  margin-top: 50px;
-  /* height: 20%;
-  max-height: 100%; */
-  width: max-content;
+  align-self: start;
+  max-height: 35%;
+  height: 105vh;
   overflow-y: auto;
   overflow-x: hidden;
   border-width: 15px;
   border-style: solid;
-  width: 100%;
   border-image: url("/images/components/border-blue-1.png") 100 fill;
 }
 
