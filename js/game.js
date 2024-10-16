@@ -177,9 +177,11 @@ class Building {
   }
 }
 const buildToActivateMethod = new Building();
+
 class UpgradeHall {
   upgradeHallHTMLSections =
     document.getElementsByClassName("upgrade-hall-child");
+
   returnElAmountBySectionId() {
     const buildingStats = buildToActivateMethod.retrieveBuildingStats();
     buildingStats.forEach((el) => {
@@ -210,20 +212,21 @@ class UpgradeHall {
     return relationIdAmount;
   }
 
-  generateHTML() {
+  updateUpgradeHallHTML() {
     const data = this.returnElAmountBySectionId();
+    const relation = {
+      voluntário: "worker",
+      miniusinahidrelétrica: "hydroeletric-plant",
+      fossasépticabiodigestora: "biodigester",
+      centrodecompostagem: "composting-center",
+      satélite: "satellite",
+      painelsolar: "solar-panel",
+      sistemaagroflorestal: "agroforestry-system",
+    };
+
     data &&
       data.forEach((el) => {
         const currentSection = document.getElementById(el.sectionIdAndName);
-        const relation = {
-          voluntário: "worker",
-          miniusinahidrelétrica: "hydroeletric-plant",
-          fossasépticabiodigestora: "biodigester",
-          centrodecompostagem: "composting-center",
-          satélite: "satellite",
-          painelsolar: "solar-panel",
-          sistemaagroflorestal: "agroforestry-system",
-        };
         for (let i = 0; i < el.amount; i++) {
           currentSection.style = "visibility: visible";
           currentSection.childNodes.length !== el.amount
@@ -1445,618 +1448,618 @@ let game = {
       ),
     ]),
 
-    new Building("Shipment", 5100000000, 260000, [
-      new Upgrade(
-        "Vanilla nebulae",
-        51000000000,
-        "Shipments are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "Wormholes",
-        255000000000,
-        "Shipments are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Frequent flyer",
-        2550000000000,
-        "Shipments are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Warp drive",
-        255000000000000,
-        "Shipments are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Chocolate monoliths",
-        25500000000000000,
-        "Shipments are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Generation ship",
-        2550000000000000000,
-        "Shipments are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Dyson sphere",
-        2550000000000000000000,
-        "Shipments are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "The final frontier",
-        2550000000000000000000000,
-        "Shipments are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Autopilot",
-        2550000000000000000000000000,
-        "Shipments are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Restaurants at the end of the universe",
-        2550000000000000000000000000000,
-        "Shipments are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "Universal alphabet",
-        25500000000000000000000000000000000,
-        "Shipments are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Alchemy Lab", 75000000000, 1500000, [
-      new Upgrade(
-        "Antimony",
-        750000000000,
-        "Alchemy labs are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "Essence of dough",
-        3750000000000,
-        "Alchemy labs are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "True chocolate",
-        37500000000000,
-        "Alchemy labs are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Ambrosia",
-        3750000000000000,
-        "Alchemy labs are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Aqua crustulae",
-        375000000000000000,
-        "Alchemy labs are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Origin crucible",
-        37500000000000000000,
-        "Alchemy labs are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Theory of atomic fluidity",
-        37500000000000000000000,
-        "Alchemy labs are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Beige goo",
-        37500000000000000000000000,
-        "Alchemy labs are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "The advent of chemistry",
-        37500000000000000000000000000,
-        "Alchemy labs are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "On second thought",
-        37500000000000000000000000000000,
-        "Alchemy labs are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "Public betterment",
-        375000000000000000000000000000000000,
-        "Alchemy labs are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Portal", 1000000000000, 10000000, [
-      new Upgrade(
-        "Ancient tablet",
-        10000000000000,
-        "Portals are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "Insane oatling workers",
-        50000000000000,
-        "Portals are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Soul bond",
-        500000000000000,
-        "Portals are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Sanity dance",
-        50000000000000000,
-        "Portals are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Brane transplant",
-        5000000000000000000,
-        "Portals are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Deity-sized portals",
-        500000000000000000000,
-        "Portals are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "End of times back-up plan",
-        500000000000000000000000,
-        "Portals are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Maddening chants",
-        500000000000000000000000000,
-        "Portals are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "The real world",
-        500000000000000000000000000000,
-        "Portals are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Dimensional garbage gulper",
-        500000000000000000000000000000000,
-        "Portals are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "Embedded microportals",
-        5000000000000000000000000000000000000,
-        "Portals are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Time Machine", 14000000000000, 65000000, [
-      new Upgrade(
-        "Flux capacitors",
-        140000000000000,
-        "Time machines are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "Time paradox resolver",
-        700000000000000,
-        "Time machines are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Quantum conundrum",
-        7000000000000000,
-        "Time machines are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Causality enforcer",
-        700000000000000000,
-        "Time machines are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Yestermorrow comparators",
-        70000000000000000000,
-        "Time machines are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Far future enactment",
-        7000000000000000000000,
-        "Time machines are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Great loop hypothesis",
-        7000000000000000000000000,
-        "Time machines are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Cookietopian moments of maybe",
-        7000000000000000000000000000,
-        "Time machines are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Second seconds",
-        7000000000000000000000000000000,
-        "Time machines are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Additional clock hands",
-        7000000000000000000000000000000000,
-        "Time machines are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "Nostalgia",
-        70000000000000000000000000000000000000,
-        "Time machines are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Antimatter Condenser", 170000000000000, 430000000, [
-      new Upgrade(
-        "Sugar bosons",
-        1700000000000000,
-        "Antimatter condensers are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "String theory",
-        8500000000000000,
-        "Antimatter condensers are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Large macaron collider",
-        85000000000000000,
-        "Antimatter condensers are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Big bang bake",
-        8500000000000000000,
-        "Antimatter condensers are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Reverse cyclotrons",
-        850000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Nanocosmics",
-        85000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "The Pulse",
-        85000000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Some other super-tiny fundamental particle? Probably?",
-        85000000000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Quantum comb",
-        85000000000000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Baking Nobel prize",
-        85000000000000000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "The definite molecule",
-        850000000000000000000000000000000000000,
-        "Antimatter condensers are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Prism", 2100000000000000, 2900000000, [
-      new Upgrade(
-        "Gem polish",
-        21000000000000000,
-        "Prims are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "9th color",
-        105000000000000000,
-        "Prims are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Chocolate light",
-        1050000000000000000,
-        "Prims are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Grainbow",
-        105000000000000000000,
-        "Prims are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Pure cosmic light",
-        10500000000000000000000,
-        "Prims are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Glow-in-the-dark",
-        1050000000000000000000000,
-        "Prims are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Lux sanctorum",
-        1050000000000000000000000000,
-        "Prims are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Reverse shadows",
-        1050000000000000000000000000000,
-        "Prims are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Crystal mirrors",
-        1050000000000000000000000000000000,
-        "Prims are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Reverse theory of light",
-        1050000000000000000000000000000000000,
-        "Prisms are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "Light capture measures",
-        10500000000000000000000000000000000000000,
-        "Prisms are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Chancemaker", 26000000000000000, 21000000000, [
-      new Upgrade(
-        "Your lucky cookie",
-        260000000000000000,
-        "Chancemakers are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "'All Bets Are Off' magic coin",
-        130000000000000000,
-        "Chancemakers are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Winning lottery ticket",
-        13000000000000000000,
-        "Chancemakers are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Four-leaf clover field",
-        130000000000000000000,
-        "Chancemakers are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "A recipe book about books",
-        13000000000000000000000,
-        "Chancemakers are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "Leprechaun village",
-        13000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Improbability drive",
-        13000000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Antisuperstistronics",
-        13000000000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Bunnypedes",
-        13000000000000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Revised probalistics",
-        13000000000000000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "0-sided dice",
-        130000000000000000000000000000000000000000,
-        "Chancemakers are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Fractal Engine", 310000000000000000, 150000000000, [
-      new Upgrade(
-        "Metabakeries",
-        3100000000000000000,
-        "Fractal engines are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "Mandelbrown sugar",
-        15500000000000000000,
-        "Fractal engines are twice as efficient",
-        5
-      ),
-      new Upgrade(
-        "Fractoids",
-        155000000000000000000,
-        "Fractal engines are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Nested universe theory",
-        15500000000000000000000,
-        "Fractal engines are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Menger sponge cake",
-        1550000000000000000000000,
-        "Fractal engines are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "One particularly good-humoured cow",
-        155000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Chocolate ouroboros",
-        155000000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "Nested",
-        155000000000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Space-filling fibers",
-        155000000000000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Endless book of prose",
-        155000000000000000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "The set of all sets",
-        1550000000000000000000000000000000000000000,
-        "Fractal engines are twice as efficient",
-        400
-      ),
-    ]),
-    new Building("Java Console", 71000000000000000000, 1100000000000, [
-      new Upgrade(
-        "The JavaScript console for dummies",
-        710000000000000000000,
-        "Java consoles are twice as efficient",
-        1
-      ),
-      new Upgrade(
-        "64bit Arrays",
-        3550000000000000000000,
-        "Java consoles are twices as efficient",
-        5
-      ),
-      new Upgrade(
-        "Stack overflow",
-        35500000000000000000000,
-        "Java consoles are twice as efficient",
-        25
-      ),
-      new Upgrade(
-        "Enterprise compiler",
-        3550000000000000000000000,
-        "Java consoles are twice as efficient",
-        50
-      ),
-      new Upgrade(
-        "Syntactic sugar",
-        355000000000000000000000000,
-        "Java consoles are twice as efficient",
-        100
-      ),
-      new Upgrade(
-        "A nice cup of coffee",
-        35500000000000000000000000000,
-        "Java consoles are twice as efficient",
-        150
-      ),
-      new Upgrade(
-        "Just-in-time baking",
-        35500000000000000000000000000000,
-        "Java consoles are twice as efficient",
-        200
-      ),
-      new Upgrade(
-        "cookies++",
-        35500000000000000000000000000000000,
-        "Java consoles are twice as efficient",
-        250
-      ),
-      new Upgrade(
-        "Software updates",
-        35500000000000000000000000000000000000,
-        "Java consoles are twice as efficient",
-        300
-      ),
-      new Upgrade(
-        "Game.Loop",
-        35500000000000000000000000000000000000000,
-        "Java consoles are twice as efficient",
-        350
-      ),
-      new Upgrade(
-        "eval()",
-        355000000000000000000000000000000000000000000,
-        "Java consoles are twice as efficient",
-        400
-      ),
-    ]),
+    // new Building("Shipment", 5100000000, 260000, [
+    //   new Upgrade(
+    //     "Vanilla nebulae",
+    //     51000000000,
+    //     "Shipments are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "Wormholes",
+    //     255000000000,
+    //     "Shipments are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Frequent flyer",
+    //     2550000000000,
+    //     "Shipments are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Warp drive",
+    //     255000000000000,
+    //     "Shipments are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Chocolate monoliths",
+    //     25500000000000000,
+    //     "Shipments are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Generation ship",
+    //     2550000000000000000,
+    //     "Shipments are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Dyson sphere",
+    //     2550000000000000000000,
+    //     "Shipments are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "The final frontier",
+    //     2550000000000000000000000,
+    //     "Shipments are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Autopilot",
+    //     2550000000000000000000000000,
+    //     "Shipments are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Restaurants at the end of the universe",
+    //     2550000000000000000000000000000,
+    //     "Shipments are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "Universal alphabet",
+    //     25500000000000000000000000000000000,
+    //     "Shipments are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Alchemy Lab", 75000000000, 1500000, [
+    //   new Upgrade(
+    //     "Antimony",
+    //     750000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "Essence of dough",
+    //     3750000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "True chocolate",
+    //     37500000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Ambrosia",
+    //     3750000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Aqua crustulae",
+    //     375000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Origin crucible",
+    //     37500000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Theory of atomic fluidity",
+    //     37500000000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Beige goo",
+    //     37500000000000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "The advent of chemistry",
+    //     37500000000000000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "On second thought",
+    //     37500000000000000000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "Public betterment",
+    //     375000000000000000000000000000000000,
+    //     "Alchemy labs are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Portal", 1000000000000, 10000000, [
+    //   new Upgrade(
+    //     "Ancient tablet",
+    //     10000000000000,
+    //     "Portals are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "Insane oatling workers",
+    //     50000000000000,
+    //     "Portals are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Soul bond",
+    //     500000000000000,
+    //     "Portals are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Sanity dance",
+    //     50000000000000000,
+    //     "Portals are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Brane transplant",
+    //     5000000000000000000,
+    //     "Portals are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Deity-sized portals",
+    //     500000000000000000000,
+    //     "Portals are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "End of times back-up plan",
+    //     500000000000000000000000,
+    //     "Portals are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Maddening chants",
+    //     500000000000000000000000000,
+    //     "Portals are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "The real world",
+    //     500000000000000000000000000000,
+    //     "Portals are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Dimensional garbage gulper",
+    //     500000000000000000000000000000000,
+    //     "Portals are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "Embedded microportals",
+    //     5000000000000000000000000000000000000,
+    //     "Portals are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Time Machine", 14000000000000, 65000000, [
+    //   new Upgrade(
+    //     "Flux capacitors",
+    //     140000000000000,
+    //     "Time machines are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "Time paradox resolver",
+    //     700000000000000,
+    //     "Time machines are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Quantum conundrum",
+    //     7000000000000000,
+    //     "Time machines are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Causality enforcer",
+    //     700000000000000000,
+    //     "Time machines are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Yestermorrow comparators",
+    //     70000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Far future enactment",
+    //     7000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Great loop hypothesis",
+    //     7000000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Cookietopian moments of maybe",
+    //     7000000000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Second seconds",
+    //     7000000000000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Additional clock hands",
+    //     7000000000000000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "Nostalgia",
+    //     70000000000000000000000000000000000000,
+    //     "Time machines are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Antimatter Condenser", 170000000000000, 430000000, [
+    //   new Upgrade(
+    //     "Sugar bosons",
+    //     1700000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "String theory",
+    //     8500000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Large macaron collider",
+    //     85000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Big bang bake",
+    //     8500000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Reverse cyclotrons",
+    //     850000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Nanocosmics",
+    //     85000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "The Pulse",
+    //     85000000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Some other super-tiny fundamental particle? Probably?",
+    //     85000000000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Quantum comb",
+    //     85000000000000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Baking Nobel prize",
+    //     85000000000000000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "The definite molecule",
+    //     850000000000000000000000000000000000000,
+    //     "Antimatter condensers are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Prism", 2100000000000000, 2900000000, [
+    //   new Upgrade(
+    //     "Gem polish",
+    //     21000000000000000,
+    //     "Prims are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "9th color",
+    //     105000000000000000,
+    //     "Prims are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Chocolate light",
+    //     1050000000000000000,
+    //     "Prims are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Grainbow",
+    //     105000000000000000000,
+    //     "Prims are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Pure cosmic light",
+    //     10500000000000000000000,
+    //     "Prims are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Glow-in-the-dark",
+    //     1050000000000000000000000,
+    //     "Prims are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Lux sanctorum",
+    //     1050000000000000000000000000,
+    //     "Prims are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Reverse shadows",
+    //     1050000000000000000000000000000,
+    //     "Prims are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Crystal mirrors",
+    //     1050000000000000000000000000000000,
+    //     "Prims are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Reverse theory of light",
+    //     1050000000000000000000000000000000000,
+    //     "Prisms are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "Light capture measures",
+    //     10500000000000000000000000000000000000000,
+    //     "Prisms are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Chancemaker", 26000000000000000, 21000000000, [
+    //   new Upgrade(
+    //     "Your lucky cookie",
+    //     260000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "'All Bets Are Off' magic coin",
+    //     130000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Winning lottery ticket",
+    //     13000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Four-leaf clover field",
+    //     130000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "A recipe book about books",
+    //     13000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "Leprechaun village",
+    //     13000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Improbability drive",
+    //     13000000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Antisuperstistronics",
+    //     13000000000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Bunnypedes",
+    //     13000000000000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Revised probalistics",
+    //     13000000000000000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "0-sided dice",
+    //     130000000000000000000000000000000000000000,
+    //     "Chancemakers are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Fractal Engine", 310000000000000000, 150000000000, [
+    //   new Upgrade(
+    //     "Metabakeries",
+    //     3100000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "Mandelbrown sugar",
+    //     15500000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Fractoids",
+    //     155000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Nested universe theory",
+    //     15500000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Menger sponge cake",
+    //     1550000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "One particularly good-humoured cow",
+    //     155000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Chocolate ouroboros",
+    //     155000000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "Nested",
+    //     155000000000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Space-filling fibers",
+    //     155000000000000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Endless book of prose",
+    //     155000000000000000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "The set of all sets",
+    //     1550000000000000000000000000000000000000000,
+    //     "Fractal engines are twice as efficient",
+    //     400
+    //   ),
+    // ]),
+    // new Building("Java Console", 71000000000000000000, 1100000000000, [
+    //   new Upgrade(
+    //     "The JavaScript console for dummies",
+    //     710000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     1
+    //   ),
+    //   new Upgrade(
+    //     "64bit Arrays",
+    //     3550000000000000000000,
+    //     "Java consoles are twices as efficient",
+    //     5
+    //   ),
+    //   new Upgrade(
+    //     "Stack overflow",
+    //     35500000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     25
+    //   ),
+    //   new Upgrade(
+    //     "Enterprise compiler",
+    //     3550000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     50
+    //   ),
+    //   new Upgrade(
+    //     "Syntactic sugar",
+    //     355000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     100
+    //   ),
+    //   new Upgrade(
+    //     "A nice cup of coffee",
+    //     35500000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     150
+    //   ),
+    //   new Upgrade(
+    //     "Just-in-time baking",
+    //     35500000000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     200
+    //   ),
+    //   new Upgrade(
+    //     "cookies++",
+    //     35500000000000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     250
+    //   ),
+    //   new Upgrade(
+    //     "Software updates",
+    //     35500000000000000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     300
+    //   ),
+    //   new Upgrade(
+    //     "Game.Loop",
+    //     35500000000000000000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     350
+    //   ),
+    //   new Upgrade(
+    //     "eval()",
+    //     355000000000000000000000000000000000000000000,
+    //     "Java consoles are twice as efficient",
+    //     400
+    //   ),
+    // ]),
   ],
   utilities: {
     ShortNumbers: [
@@ -2319,9 +2322,7 @@ let game = {
     newsLogic() {
       setInterval(() => {
         game.updateDisplays("enabled");
-        game.challengeActions.handleChallengePopUpTrigger();
-
-        game.upgradeHall.generateHTML();
+        game.challengeActions.handleChallengePopUpTrigger()
       }, 3000);
     },
 
@@ -2342,6 +2343,8 @@ let game = {
         game.settings.recalculateCPS = false;
         game.player.aMPF = CPS / game.settings.frameRate;
         game.updateShop(game.currentShop);
+        game.upgradeHall.updateUpgradeHallHTML()
+        console.log('update')
       }
       if (document.hasFocus()) {
         game.player.earnCookie(game.player.aMPF);
