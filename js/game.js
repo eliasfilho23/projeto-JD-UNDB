@@ -230,7 +230,9 @@ class UpgradeHall {
         for (let i = 0; i < el.amount; i++) {
           currentSection.style = "visibility: visible";
           currentSection.childNodes.length !== el.amount
-            ? (currentSection.innerHTML += `<img style='height: 90%; margin-right: 10px; margin-top:20px'
+            ? (currentSection.innerHTML += `
+              <img class='upgrade-hall-image'
+               style='height: 90%; margin-right: 10px; margin-top:20px'
                      src='./images/upgrade-hall-sprites/${
                        relation[
                          el.sectionIdAndName.toLowerCase().split(" ").join("")
@@ -240,6 +242,12 @@ class UpgradeHall {
             : "";
         }
       });
+      const images = document.getElementsByClassName('upgrade-hall-image')
+      for(let i = 0; i < images.length; i++){
+        images[i].addEventListener('mouseover', (event) => {
+          console.log(event.target)
+        })
+      }
   }
 }
 
@@ -1001,7 +1009,7 @@ let game = {
       },
     ],
     milestoneNewsArray: [
-      { news: "pikachu", limit: 100 },
+      { news: "Com a pouca ajuda que você empenhou em fornecer, alguns indivíduos são beneficiados; porém, nada muito significativo.", limit: 100 },
       { news: "raichu", limit: 1000 },
       { news: "riolu", limit: 5000 },
       { news: "lucario", limit: 10000 },

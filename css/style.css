@@ -61,6 +61,8 @@ h1 {
   position: absolute;
   bottom: 0;
   right: 0;
+  top: 0;
+  left: 0;
   margin: auto;
   width: 400px;
   height: 200px;
@@ -268,6 +270,44 @@ h1 {
   text-align: center;
   margin: auto;
   grid-column: 2;
+}
+
+.advice {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  color: white;
+  padding: 50px;
+  border-width: 25px;
+  border-style: solid;
+  border-image: url("/images/components/border-5.png") 150 fill;
+  background-image: url("/images/components/div-bg-6.png");
+  bottom: 0;
+  top: 200px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.advice-text {
+  width: 400px;
+  font-size: 20px;
+}
+
+.advice-text h4 {
+  font-family: arial;
+  line-height: 25px;
+}
+
+.advice-text a {
+  color: lightgreen;
+}
+
+.advice-close-button {
+  position: absolute;
+  top: -1px;
+  left: -1px;
 }
 
 .challengeDiv {
