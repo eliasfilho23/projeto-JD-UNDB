@@ -135,9 +135,9 @@ class Building {
         } else {
           if (notMet == false) {
             notMet = true;
-            html += `</br><button class="upgNext">Next upgrade in <b>${
+            html += `</br><button class="upgNext">Próximo Upgrade desbloqueado em <b>${
               upgrade.limit - this.amount
-            }</b> more ${this.name.toLowerCase()}(s)</button>`;
+            }</b> ${this.name.toLowerCase()}(s)</button>`;
           }
         }
       }
@@ -167,7 +167,7 @@ class Building {
              ${this.name.toLowerCase()}(s).</br>Cada ${this.name.toLowerCase()}
               produz <b style='font-size: 26px'>${format(
                 singleEffect
-              )}</b> ponto(s) de notoriedade.</br>
+              )}</b> ponto(s) de impacto.</br>
               Todos os ${this.name.toLowerCase()}(s) juntos produzem um total de 
               <b style='font-size: 26px'>${format(
                 this.effect
@@ -230,7 +230,7 @@ class UpgradeHall {
         for (let i = 0; i < el.amount; i++) {
           currentSection.style = "visibility: visible";
           currentSection.childNodes.length !== el.amount
-            ? (currentSection.innerHTML += `<img style=' margin-right: 10px; margin-top:75px'
+            ? (currentSection.innerHTML += `<img style='height: 90%; margin-right: 10px; margin-top:20px'
                      src='./images/upgrade-hall-sprites/${
                        relation[
                          el.sectionIdAndName.toLowerCase().split(" ").join("")
@@ -420,7 +420,7 @@ class Challenges {
       case 4:
         challengeDiv.innerHTML = `<div class='challengeDivTitle'>Desafio Quiz</div>
                         <div class='challengeDivContent'>
-                        <img class='challengeDivImg' src='images/cookie.png'/>
+                        <img class='challengeDivImg' src='images/challenges/challenge-4-image.jpg'/>
                         <div class='challengeDivText'>
                           Qual é o nome do costume tradicional amazônico que envolve o preparo e consumo da farinha de mandioca,
                            um dos alimentos mais importantes para os ribeirinhos?    
@@ -633,49 +633,49 @@ let game = {
     {
       name: "Cada ajuda é significativa",
       status: "disabled",
-      description: "Adquiriu um ponto de notoriedade",
+      description: "Adquiriu um ponto de impacto",
       trigger: "limit",
       triggerDetail: 1,
     },
     {
       name: "Amigo da causa",
       status: "disabled",
-      description: "Adquiriu 25 pontos de notoriedade",
+      description: "Adquiriu 25 pontos de impacto",
       trigger: "limit",
       triggerDetail: 25,
     },
     {
       name: "Bolso generoso para a amazônia",
       status: "disabled",
-      description: "Adquiriu 100 pontos de notoriedade",
+      description: "Adquiriu 100 pontos de impacto",
       trigger: "limit",
       triggerDetail: 100,
     },
     {
       name: "Começando o impacto",
       status: "disabled",
-      description: "Adquiriu 500 pontos de notoriedade",
+      description: "Adquiriu 500 pontos de impacto",
       trigger: "limit",
       triggerDetail: 500,
     },
     {
       name: "Mobilizador da causa",
       status: "disabled",
-      description: "Adquiriu 1000 pontos de notoriedade",
+      description: "Adquiriu 1000 pontos de impacto",
       trigger: "limit",
       triggerDetail: 1000,
     },
     {
       name: "Garoto-propaganda da NAPRA",
       status: "disabled",
-      description: "Adquiriu 2500 pontos de notoriedade",
+      description: "Adquiriu 2500 pontos de impacto",
       trigger: "limit",
       triggerDetail: 2500,
     },
     {
       name: "You gotta go far, kid",
       status: "disabled",
-      description: "Adquiriu 5000 pontos de notoriedade",
+      description: "Adquiriu 5000 pontos de impacto",
       trigger: "limit",
       triggerDetail: 5000,
     },
@@ -1071,53 +1071,53 @@ let game = {
         new Upgrade(
           "Luvas reforçadas",
           100,
-          "Voluntários e coleta de lixo são duas vezes mais eficientes",
+          "Voluntários e a geração de PI por clique são duas vezes mais eficientes",
           1
         ),
         new Upgrade(
           "Carrinho de mão robusto",
           500,
-          "Voluntários e coleta de lixo são duas vezes mais eficientes",
+          "Voluntários e a geração de PI por clique são duas vezes mais eficientes",
           1
         ),
         new Upgrade(
           "Rede de coleta comunitária",
           10000,
-          "Voluntários e coleta de lixo são duas vezes mais eficientes",
+          "Voluntários e a geração de PI por clique são duas vezes mais eficientes",
           10
         ),
         new Upgrade(
           "Veículo de coleta",
           100000,
-          "Voluntários ganham +0.1 pontos de notoriedade por cada building não voluntário",
+          "Voluntários ganham +0.1 pontos de impacto por cada infraestrutura diferente de voluntário financiada",
           25,
           0.1
         ),
         new Upgrade(
           "Parceria com ONGs",
           10000000,
-          "Voluntários ganham +0.5 pontos de notoriedade por cada building não voluntário",
+          "Voluntários ganham +0.5 pontos de impacto por cada building não voluntário",
           50,
           0.5
         ),
         new Upgrade(
           "Caminhão de coleta automatizado",
           100000000,
-          "Voluntários ganham +5 pontos de notoriedade por cada building não voluntário",
+          "Voluntários ganham +5 pontos de impacto por cada building não voluntário",
           100,
           5
         ),
         new Upgrade(
           "Programa de reciclagem",
           1000000000,
-          "Voluntários ganham +50 pontos de notoriedade por cada building não voluntário",
+          "Voluntários ganham +50 pontos de impacto por cada building não voluntário",
           150,
           50
         ),
         new Upgrade(
           "Educação ambiental nas escolas",
           10000000000,
-          "Voluntários ganham +500 pontos de notoriedade por cada building não voluntário",
+          "Voluntários ganham +500 pontos de impacto por cada building não voluntário",
           200,
           500
         ),
