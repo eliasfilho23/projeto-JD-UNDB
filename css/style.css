@@ -377,31 +377,31 @@ h1 {
 }
 
 #voluntário {
-  background-image: url("../images/upgrade-hall-bg/worker-bg.jpeg");
+  background-image: url("../images/building-hall-bg/worker-bg.jpeg");
   background-size: contain;
 }
 #miniusinahidrelétrica {
-  background-image: url("../images/upgrade-hall-bg/hydroeletric-plant-bg-2.jpg");
+  background-image: url("../images/building-hall-bg/hydroeletric-plant-bg-2.jpg");
   background-size: contain;
 }
 #fossasépticabiodigestora {
-  background-image: url("../images/upgrade-hall-bg/biodigester-bg-1.png");
+  background-image: url("../images/building-hall-bg/biodigester-bg-1.png");
   background-size: contain;
 }
 #centrodecompostagem {
-  background-image: url("../images/upgrade-hall-bg/composting-center-bg-1.png");
+  background-image: url("../images/building-hall-bg/composting-center-bg-1.png");
   background-size: contain;
 }
 #satélite {
-  background-image: url("../images/upgrade-hall-bg/satellite-bg.jpg");
+  background-image: url("../images/building-hall-bg/satellite-bg.jpg");
   background-size: contain;
 }
 #painelsolar {
-  background-image: url("../images/upgrade-hall-bg/solar-panel-2-bg.jpeg");
+  background-image: url("../images/building-hall-bg/solar-panel-2-bg.jpeg");
   background-size: contain;
 }
 #sistemaagroflorestal {
-  background-image: url("../images/upgrade-hall-bg/agroforestry-system-bg-2.jpg");
+  background-image: url("../images/building-hall-bg/agroforestry-system-bg-2.jpg");
   background-size: contain;
 }
 
@@ -744,7 +744,7 @@ button.upgBtn:active {
   transform: translateY(2px);
 }
 
-.upgrade-hall-container {
+.building-hall-container {
   background-image: url('/images/components/div-bg-blue.png');
   align-self: start;
   max-height: 35%;
@@ -756,7 +756,7 @@ button.upgBtn:active {
   border-image: url("/images/components/border-blue-1.png") 100 fill;
 }
 
-.upgrade-hall-child {
+.building-hall-child {
   background-color: #facab5;
   display: flex;
   justify-content: space-around;

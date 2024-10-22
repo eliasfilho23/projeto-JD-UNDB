@@ -178,9 +178,9 @@ class Building {
 }
 const buildToActivateMethod = new Building();
 
-class UpgradeHall {
-  upgradeHallHTMLSections =
-    document.getElementsByClassName("upgrade-hall-child");
+class BuildingHall {
+  buildingHallHTMLSections =
+    document.getElementsByClassName("building-hall-child");
 
   returnElAmountBySectionId() {
     const buildingStats = buildToActivateMethod.retrieveBuildingStats();
@@ -190,9 +190,9 @@ class UpgradeHall {
       }
     });
     const relationIdAmount = [];
-    for (let i = 0; i < this.upgradeHallHTMLSections.length; i++) {
-      if (this.upgradeHallHTMLSections[i]) {
-        const currentParsedElement = this.upgradeHallHTMLSections[i];
+    for (let i = 0; i < this.buildingHallHTMLSections.length; i++) {
+      if (this.buildingHallHTMLSections[i]) {
+        const currentParsedElement = this.buildingHallHTMLSections[i];
         const buildingName = currentParsedElement.id;
         const currentSection = buildingStats.find((el) =>
           el ? el.name === buildingName : ""
@@ -212,7 +212,7 @@ class UpgradeHall {
     return relationIdAmount;
   }
 
-  updateUpgradeHallHTML() {
+  updateBuildingHallHTML() {
     const data = this.returnElAmountBySectionId();
     const relation = {
       voluntário: "worker",
@@ -231,9 +231,9 @@ class UpgradeHall {
           currentSection.style = "visibility: visible";
           currentSection.childNodes.length !== el.amount
             ? (currentSection.innerHTML += `
-              <img class='upgrade-hall-image'
+              <img class='building-hall-image'
                style='height: 90%; margin-right: 10px; margin-top:20px'
-                     src='./images/upgrade-hall-sprites/${
+                     src='./images/building-hall-sprites/${
                        relation[
                          el.sectionIdAndName.toLowerCase().split(" ").join("")
                        ]
@@ -242,7 +242,7 @@ class UpgradeHall {
             : "";
         }
       });
-      const images = document.getElementsByClassName('upgrade-hall-image')
+      const images = document.getElementsByClassName('building-hall-image')
       for(let i = 0; i < images.length; i++){
         images[i].addEventListener('mouseover', (event) => {
           console.log(event.target)
@@ -2305,7 +2305,7 @@ let game = {
     },
   },
   player: new Player(),
-  upgradeHall: new UpgradeHall(),
+  buildingHall: new BuildingHall(),
   giveCookies(num) {
     this.player.earnCookie(num);
   },
@@ -2351,7 +2351,7 @@ let game = {
         game.settings.recalculateCPS = false;
         game.player.aMPF = CPS / game.settings.frameRate;
         game.updateShop(game.currentShop);
-        game.upgradeHall.updateUpgradeHallHTML()
+        game.buildingHall.updateBuildingHallHTML()
         console.log('update')
       }
       if (document.hasFocus()) {
@@ -2423,7 +2423,6 @@ let game = {
     let building = game.utilities.getBuildingByName(name);
     building.buy(amount);
     this.buildingBuyingAchievementTriggerListener(building);
-    console.log(building);
   },
   buyUpgrade(buildingName, upgrade) {
     let building = game.utilities.getBuildingByName(buildingName);
