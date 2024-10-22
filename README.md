@@ -4,6 +4,7 @@ AND CURRENTLY STANDS AS A PROTOTYPE.
 Credits to alexjken https://github.com/alexjken for providing the base game!
 
 Pending Updates:
+
 Most urgent:
 - Properly implement mechanics according to progress
 - Properly implement news
