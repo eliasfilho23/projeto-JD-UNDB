@@ -1,7 +1,5 @@
-#####################################
 THIS GAME IS NOT FINISHED, 
 AND CURRENTLY STANDS AS A PROTOTYPE.
-#####################################
 
 Credits to alexjken https://github.com/alexjken for providing the base game!
 
