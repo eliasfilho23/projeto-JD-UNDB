@@ -25,7 +25,7 @@ Less urgent:
 Future features:
 - Implement Golden Cookies themed as amazonian folkloric entities
   
-##################################################################
+###############################################################################
 ESSE JOGO NÃO ESTÁ COMPLETO,
 E SUA VERSÃO ATUAL É UM PROTÓTIPO.
 
